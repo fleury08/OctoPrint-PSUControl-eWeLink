@@ -2,7 +2,7 @@
 
 All notable changes to this project are documented in this file.
 
-## [1.0.2] - 2026-01-07
+## [1.0.3] - 2026-01-07
 
 ### Maintenance
 - **Repository** - Prepared for official plugin repository submission.
