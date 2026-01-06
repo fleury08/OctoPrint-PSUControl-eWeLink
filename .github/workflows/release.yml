@@ -2,11 +2,11 @@ name: Release
 
 on:
   workflow_dispatch:
-    inputs:
-      version:
-        description: 'Version to release (e.g., 1.0.0)'
-        required: true
-        type: string
+  push:
+    branches:
+      - main
+    paths:
+      - 'setup.py'
 
 jobs:
   release:
@@ -17,6 +17,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Need full history for tag check
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -28,32 +30,38 @@ jobs:
         run: |
           VERSION=$(python -c "import re; content=open('setup.py').read(); print(re.search(r'plugin_version\s*=\s*[\"\\']([^\"\\']+)[\"\\']', content).group(1))")
           echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Detected version: $VERSION"
 
-      - name: Verify version matches
+      - name: Check if release already exists
+        id: check_release
         run: |
-          if [ "${{ steps.get_version.outputs.version }}" != "${{ inputs.version }}" ]; then
-            echo "Error: Input version (${{ inputs.version }}) does not match setup.py version (${{ steps.get_version.outputs.version }})"
-            echo "Please update setup.py before releasing."
-            exit 1
+          if git rev-parse "${{ steps.get_version.outputs.version }}" >/dev/null 2>&1; then
+            echo "Tag ${{ steps.get_version.outputs.version }} already exists, skipping release."
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "Tag does not exist, proceeding with release."
+            echo "exists=false" >> $GITHUB_OUTPUT
           fi
 
       - name: Run tests
+        if: steps.check_release.outputs.exists == 'false'
         run: |
           python -m unittest discover -s tests -v
 
       - name: Create Release
+        if: steps.check_release.outputs.exists == 'false'
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ inputs.version }}
-          name: v${{ inputs.version }}
+          tag_name: ${{ steps.get_version.outputs.version }}
+          name: v${{ steps.get_version.outputs.version }}
           body: |
-            ## OctoPrint-PSUControl-eWeLink v${{ inputs.version }}
+            ## OctoPrint-PSUControl-eWeLink v${{ steps.get_version.outputs.version }}
             
             ### Installation
             
             Install via OctoPrint Plugin Manager or manually:
             ```
-            https://github.com/${{ github.repository }}/archive/${{ inputs.version }}.zip
+            https://github.com/${{ github.repository }}/archive/${{ steps.get_version.outputs.version }}.zip
             ```
             
             See [CHANGELOG](https://github.com/${{ github.repository }}/blob/main/docs/CHANGELOG.md) for details.
