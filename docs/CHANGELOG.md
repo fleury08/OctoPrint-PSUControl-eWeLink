@@ -2,6 +2,13 @@
 
 All notable changes to this project are documented in this file.
 
+## [1.0.2] - 2026-01-07
+
+### Maintenance
+- **Repository** - Prepared for official plugin repository submission.
+- **Metadata** - Added privacy policy links and screenshots to registration data.
+- **Packaging** - Cleaned up `setup.py` and `MANIFEST.in`.
+
 ## [1.0.1] - 2026-01-06
 
 ### Fixed

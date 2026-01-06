@@ -8,7 +8,7 @@ authors:
 - Christos Miniotis
 license: MIT
 
-date: 2026-01-06
+date: 2026-01-07
 
 homepage: https://github.com/chrismin13/OctoPrint-PSUControl-eWeLink
 source: https://github.com/chrismin13/OctoPrint-PSUControl-eWeLink
@@ -41,6 +41,13 @@ compatibility:
 
 attributes:
 - cloud
+
+screenshots:
+- url: /assets/img/plugins/psucontrol_ewelink/settings_screenshot.png
+  alt: Settings Interface
+  caption: Plugin settings allowing device selection and credential configuration
+
+featuredimage: /assets/img/plugins/psucontrol_ewelink/settings_screenshot.png
 ---
 
 Integrate [eWeLink](https://ewelink.cc/) smart switches (Sonoff, etc.) with [OctoPrint-PSUControl](https://github.com/kantlivelong/OctoPrint-PSUControl) to turn your 3D printer on and off remotely.
