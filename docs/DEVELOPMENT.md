@@ -34,12 +34,13 @@ The `ewelink` Python library has some incomplete implementations.
 The eWeLink API automatically redirects to the correct region:
 
 ```python
-# When logging in with wrong region:
-await app.login(region="us")  # Account is actually EU
+# Login without specifying a region:
+login = await app.login()  # No region parameter needed
 
-# API returns error 301 with correct region
-# Library auto-retries with correct region
-# Final result: login.region == "eu"
+# If account is on EU but library defaults to US:
+# → API returns error 301 with correct region
+# → Library auto-retries with correct region
+# → Final result: login.region == "eu"
 ```
 
 This allows us to remove the region dropdown entirely and just hardcode "us" as the initial attempt.
