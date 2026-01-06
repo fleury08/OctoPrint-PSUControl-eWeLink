@@ -188,3 +188,7 @@ When reporting issues, include:
 1. Check [GitHub Issues](https://github.com/chrismin13/OctoPrint-PSUControl-eWeLink/issues) for similar problems
 2. Open a new issue with debug information above
 3. Include screenshots if relevant
+
+---
+
+📚 **More docs:** [README](../README.md) · [Security](SECURITY.md) · [API](API.md) · [Architecture](ARCHITECTURE.md) · [Development](DEVELOPMENT.md) · [Changelog](CHANGELOG.md)

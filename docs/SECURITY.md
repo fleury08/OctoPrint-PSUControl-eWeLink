@@ -172,3 +172,7 @@ def on_settings_save(self, data):
 2. **Don't share config.yaml**: It contains your obfuscated password
 3. **Use a dedicated eWeLink account**: Don't use your primary account if concerned
 4. **Check logs**: Passwords are never logged by this plugin
+
+---
+
+📚 **More docs:** [README](../README.md) · [Troubleshooting](TROUBLESHOOTING.md) · [API](API.md) · [Architecture](ARCHITECTURE.md) · [Development](DEVELOPMENT.md) · [Changelog](CHANGELOG.md)

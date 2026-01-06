@@ -138,3 +138,7 @@ The eWeLink API automatically redirects to the correct region:
 2. If account is on different region (e.g., `eu`), API returns the correct region
 3. Library automatically re-authenticates to correct region
 4. User doesn't need to manually select region
+
+---
+
+📚 **More docs:** [README](../README.md) · [Troubleshooting](TROUBLESHOOTING.md) · [Security](SECURITY.md) · [API](API.md) · [Development](DEVELOPMENT.md) · [Changelog](CHANGELOG.md)

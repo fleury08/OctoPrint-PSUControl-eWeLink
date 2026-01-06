@@ -2,8 +2,6 @@
 
 Integrate [eWeLink](https://ewelink.cc/) smart switches (Sonoff, etc.) with [OctoPrint-PSUControl](https://github.com/kantlivelong/OctoPrint-PSUControl) to turn your 3D printer on and off.
 
-<!-- add  -->
-
 ## Requirements
 
 *   **OctoPrint**: 1.3.10 or higher
@@ -44,13 +42,18 @@ This plugin takes security seriously:
 *   **UI Masking**: Passwords are masked (`********`) in the settings UI and stripped from the browser memory.
 *   **Secure API**: Credentials are transmitted to the eWeLink API over HTTPS.
 
-## Troubleshooting
+## Documentation
 
-*   **Unknown Command Error**: Make sure the plugin is up to date. Try reinstalling if you encounter API errors.
-*   **Authentication Failed**: Double-check your eWeLink email and password.
-*   **Device Not Found**: Ensure the device is "Online" in the eWeLink app before scanning.
+| Document | Description |
+|----------|-------------|
+| [Troubleshooting](docs/TROUBLESHOOTING.md) | Common issues and solutions |
+| [Security](docs/SECURITY.md) | How credentials are protected |
+| [API Reference](docs/API.md) | Internal APIs and integration points |
+| [Architecture](docs/ARCHITECTURE.md) | Technical design overview |
+| [Development](docs/DEVELOPMENT.md) | Setup for contributors |
+| [Changelog](docs/CHANGELOG.md) | Version history |
+| [Privacy Policy](PRIVACY.md) | Data handling practices |
 
 ## License
 
 MIT
-

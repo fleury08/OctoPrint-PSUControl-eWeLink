@@ -23,4 +23,8 @@ Initial public release.
 
 ### Documentation
 - Complete documentation suite: README, SECURITY, TROUBLESHOOTING, API, ARCHITECTURE, DEVELOPMENT
+
+---
+
+📚 **More docs:** [README](../README.md) · [Troubleshooting](TROUBLESHOOTING.md) · [Security](SECURITY.md) · [API](API.md) · [Architecture](ARCHITECTURE.md) · [Development](DEVELOPMENT.md)
 - Privacy Policy for cloud service usage
