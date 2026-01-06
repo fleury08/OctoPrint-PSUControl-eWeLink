@@ -1,4 +1,22 @@
+<!-- 
+    OctoPrint-PSUControl-eWeLink Settings Template
+    
+    This Jinja2 template defines the HTML for the plugin's settings page.
+    It uses Knockout.js data bindings (data-bind="...") to connect to the ViewModel 
+    defined in `static/js/psucontrol_ewelink.js`.
+    
+    Key features:
+    - Alerts for missing dependencies (PSU Control)
+    - Credentials form (Email/Password) with masking
+    - "Test Connection" button to fetch devices via API
+    - Dynamic device selection dropdown
+-->
 <form class="form-horizontal">
+    <!-- 
+        Dependency Alerts 
+        These alerts use `isPSUControlInstalled` and `isPSUControlConfigured` computed observables 
+        from the ViewModel to warn the user if the parent "PSU Control" plugin is missing or not linked.
+    -->
     <div class="alert alert-error" data-bind="visible: !isPSUControlInstalled()">
         <strong>Missing Requirement:</strong> PSU Control plugin is not installed! 
         This plugin requires <a href="https://plugins.octoprint.org/plugins/psucontrol/" target="_blank">PSU Control</a> to function. 
@@ -16,6 +34,12 @@
     
     <fieldset>
         <legend>eWeLink Credentials</legend>
+        <!-- 
+            Credentials Inputs
+            Bound directly to `settings.plugins.psucontrol_ewelink.email` and `.password`.
+            The password field is type="password" and the value is masked ("********") by the ViewModel 
+            if an encrypted password is already stored.
+        -->
         <div class="control-group">
             <label class="control-label">Email</label>
             <div class="controls">
@@ -31,6 +55,13 @@
 
         
         <!-- Test Connection Button -->
+        
+        <!-- 
+             Test Connection Button 
+             - `click: testConnection`: Triggers the API call in the ViewModel
+             - `disable: scanning`: Disables button while request is in flight
+             - Shows spinner icon when `scanning` is true
+        -->
         <div class="control-group">
             <div class="controls">
                 <button type="button" class="btn btn-primary" data-bind="click: testConnection, disable: scanning">
@@ -43,12 +74,22 @@
         </div>
 
         <legend>Device Configuration</legend>
+        <legend>Device Configuration</legend>
         <div class="control-group">
             <label class="control-label">Device ID</label>
             <div class="controls">
+                <!-- 
+                    Device ID Input
+                    Can be typed manually or populated via the dropdown below.
+                -->
                 <input type="text" class="input-block-level" data-bind="value: settings.plugins.psucontrol_ewelink.device_id">
                 
-                <!-- Found Devices Dropdown -->
+                <!-- 
+                    Found Devices Dropdown 
+                    Only visible if `deviceList` (populated by Test Connection) has items.
+                    Iterates over `deviceList` to show Name + ID.
+                    Clicking calls `selectDevice` to populate the input above.
+                -->
                 <div style="margin-top: 10px;" data-bind="visible: deviceList().length > 0">
                     <span class="help-inline">Found Devices:</span>
                     <div class="btn-group">

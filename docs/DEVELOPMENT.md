@@ -124,7 +124,31 @@ async def test():
 asyncio.run(test())
 ```
 
-## 10. Documentation Index
+## 10. Running Tests
+
+The plugin includes a unit test suite in `tests/test_plugin.py`. These tests mock OctoPrint and eWeLink dependencies, so they can be run on any machine without needing a full OctoPrint server or real device connection.
+
+To run the tests:
+
+```bash
+python3 -m unittest tests/test_plugin.py
+```
+
+This is highly recommended before verifying changes to ensure no regressions in core logic (encryption, fallback, etc).
+
+## 11. Development Guidelines
+
+Follow these rules to maintain the stability of the plugin:
+
+1.  **Testing First**: Always run the unit tests (`python3 -m unittest tests/test_plugin.py`) before committing.
+2.  **Async Discipline**:
+    *   OctoPrint is **Synchronous**.
+    *   eWeLink is **Asynchronous**.
+    *   **Rule**: Never call `asyncio.run()` directly in the main thread. Always use `self._run_coro()` or spawn a separate thread.
+3.  **Credential Safety**: Never log the raw password. Use `_encrypt_password` immediately upon save, and `_decrypt_password` only when needed for the API connection.
+4.  **Documentation**: If you add a feature, update `API.md` and add a test case.
+
+## 12. Documentation Index
 
 - [ARCHITECTURE.md](ARCHITECTURE.md) - Component diagram, data flow
 - [SECURITY.md](SECURITY.md) - Password obfuscation details

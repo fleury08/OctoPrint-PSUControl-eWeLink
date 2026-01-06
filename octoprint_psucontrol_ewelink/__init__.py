@@ -24,6 +24,17 @@ class PSUControlEWeLinkPlugin(octoprint.plugin.StartupPlugin,
                               octoprint.plugin.SimpleApiPlugin,
                               octoprint.plugin.AssetPlugin,
                               octoprint.plugin.RestartNeedingPlugin):
+    """
+    Main Plugin Class.
+    
+    Integrates eWeLink cloud devices with OctoPrint's PSU Control plugin.
+    
+    Architecture:
+    - Inherits from multiple OctoPrint mixins to handle settings, assets, and APIs.
+    - Manages a separate background thread with an `asyncio` event loop.
+    - Uses the `ewelink` Python library (async) to communicate with the cloud.
+    - Bridges synchronous OctoPrint calls (from PSU Control) to the async loop.
+    """
 
     def __init__(self):
         self._ewelink_app = None
@@ -33,7 +44,13 @@ class PSUControlEWeLinkPlugin(octoprint.plugin.StartupPlugin,
 
     ##~~ Encryption Helpers
 
+    ##~~ Encryption Helpers
+
     def _get_salt(self):
+        """
+        Retrieves or generates a unique 32-byte salt for this installation.
+        The salt is stored in `~/.octoprint/data/psucontrol_ewelink/salt`.
+        """
         if self._salt:
             return self._salt
         
@@ -53,6 +70,12 @@ class PSUControlEWeLinkPlugin(octoprint.plugin.StartupPlugin,
         return bytes([b ^ salt[i % len(salt)] for i, b in enumerate(data)])
 
     def _encrypt_password(self, plaintext):
+        """
+        Obfuscates the password using XOR with a local salt.
+        Returns a string prefixed with "ENC:" to identify it as encrypted.
+        Note: This is not "secure" encryption (key is on disk), but prevents 
+        accidental exposure in logs or the UI.
+        """
         if not plaintext or plaintext.startswith("ENC:"):
             return plaintext
         try:
@@ -64,6 +87,9 @@ class PSUControlEWeLinkPlugin(octoprint.plugin.StartupPlugin,
             return plaintext
 
     def _decrypt_password(self, ciphertext):
+        """
+        Reverses the XOR obfuscation to retrieve the plaintext password.
+        """
         if not ciphertext or not ciphertext.startswith("ENC:"):
             return ciphertext
         try:
@@ -95,6 +121,13 @@ class PSUControlEWeLinkPlugin(octoprint.plugin.StartupPlugin,
 
 
     def on_after_startup(self):
+        """
+        Called by OctoPrint after the server has started.
+        1. Migrates any legacy plaintext passwords to encrypted format.
+        2. Starts the asyncio background thread.
+        3. Initializes the eWeLink connection.
+        4. Registers with the parent PSU Control plugin.
+        """
         self._logger.info("PSUControl-eWeLink loaded!")
         
         # Migration: Encrypt existing plaintext password
@@ -117,6 +150,11 @@ class PSUControlEWeLinkPlugin(octoprint.plugin.StartupPlugin,
             self._logger.warning("PSUControl not found or incompatible.")
 
     def _start_loop(self):
+        """
+        Starts the dedicated asyncio event loop in a daemon thread.
+        This is required because the `ewelink` library uses aiohttp, which needs
+        a persistent event loop that doesn't conflict with OctoPrint's main thread.
+        """
         if self._loop and self._loop.is_running():
             return
         self._loop = asyncio.new_event_loop()
@@ -136,6 +174,10 @@ class PSUControlEWeLinkPlugin(octoprint.plugin.StartupPlugin,
             self._logger.info("Asyncio loop stopped.")
 
     def _run_coro(self, coro):
+        """
+        Helper to run an async coroutine from a synchronous context (OctoPrint).
+        It submits the coroutine to the background loop and waits for the result (up to 10s).
+        """
         if not self._loop:
              self._start_loop()
         future = asyncio.run_coroutine_threadsafe(coro, self._loop)
@@ -146,6 +188,9 @@ class PSUControlEWeLinkPlugin(octoprint.plugin.StartupPlugin,
             raise
 
     def _init_ewelink(self):
+        """
+        Initializes the eWeLink app connection using stored credentials.
+        """
         email = self._settings.get(["email"])
         password = self._decrypt_password(self._settings.get(["password"]))
         device_id = self._settings.get(["device_id"])
@@ -173,6 +218,9 @@ class PSUControlEWeLinkPlugin(octoprint.plugin.StartupPlugin,
         # We don't store device object because we interact via raw requests to support all devices
 
     def turn_psu_on(self):
+        """
+        Method called by PSU Control to turn the device ON.
+        """
         device_id = self._settings.get(["device_id"])
         if not self._ewelink_app:
              self._logger.warning("eWeLink app not connected.")
@@ -184,6 +232,9 @@ class PSUControlEWeLinkPlugin(octoprint.plugin.StartupPlugin,
              self._logger.error(f"Error turning ON: {e}")
 
     def turn_psu_off(self):
+        """
+        Method called by PSU Control to turn the device OFF.
+        """
         device_id = self._settings.get(["device_id"])
         if not self._ewelink_app:
              self._logger.warning("eWeLink app not connected.")
@@ -215,8 +266,12 @@ class PSUControlEWeLinkPlugin(octoprint.plugin.StartupPlugin,
         threading.Thread(target=self._init_ewelink).start()
 
     def on_api_command(self, command, data):
-        import flask
-        
+        """
+        Handles requests from the Javascript frontend.
+        Command: `get_devices`
+        - Authenticates with provided or stored credentials.
+        - Fetches list of devices for the user to select.
+        """
         if command == "get_devices":
             email = data.get("email")
             password = data.get("password")
@@ -262,6 +317,12 @@ class PSUControlEWeLinkPlugin(octoprint.plugin.StartupPlugin,
             return f"Connection failed: {str(e)}"
 
     def get_psu_state(self):
+        """
+        Method called by PSU Control to poll the current device state.
+        Returns:
+            True if ON
+            False if OFF
+        """
         device_id = self._settings.get(["device_id"])
         if not self._ewelink_app:
              return False

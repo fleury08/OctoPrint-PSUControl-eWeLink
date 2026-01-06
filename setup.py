@@ -14,7 +14,7 @@ plugin_package = "octoprint_psucontrol_ewelink"
 plugin_name = "PSU Control - eWeLink"
 
 # The plugin's version. Can be overwritten within OctoPrint's internal data via __plugin_version__ in the plugin module
-plugin_version = "1.0.1"
+plugin_version = "1.0.2"
 
 # The plugin's description. Can be overwritten within OctoPrint's internal data via __plugin_description__ in the plugin
 # module
@@ -54,7 +54,7 @@ def params():
 		license=plugin_license,
 		packages=[plugin_package],
 		include_package_data=True,
-        package_data={plugin_package: ["templates/*", "static/js/*", "static/css/*"]},
+        package_data={plugin_package: ["templates/*", "static/js/*"]},
 		zip_safe=False,
         python_requires=">=3.7,<4",
 		install_requires=plugin_requires,

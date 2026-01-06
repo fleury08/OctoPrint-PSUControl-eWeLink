@@ -4,6 +4,12 @@
  * Author: Christos Miniotis
  * License: MIT
  */
+
+// This is a Knockout.js ViewModel that handles the Settings UI logic.
+// It interacts with:
+// 1. OctoPrint's Settings System (to save email, password, device_id)
+// 2. The Python Backend (via SimpleApiCommand to fetch devices)
+// 3. The Backend's `on_settings_save` hook (to handle password encryption)
 $(function () {
     function PSUControlEWeLinkSettingsViewModel(parameters) {
         var self = this;
@@ -17,11 +23,18 @@ $(function () {
             var pluginSettings = self.settings.plugins.psucontrol_ewelink;
 
             // Initial Masking
+            // The backend stores the password in an encrypted format starting with "ENC:".
+            // We never want to show this raw string to the user, nor do we want to show the actual password.
+            // So, if a value exists, we immediately replace it with "********" (8 stars).
+            // This tells the user "a password is set" without revealing it.
             if (pluginSettings.password()) {
                 pluginSettings.password("********");
             }
 
             // Watch for updates (e.g. after save) to re-mask if ENC string comes back
+            // When the user clicks "Save", the backend encrypts the password and updates the settings.
+            // The updated settings (now containing "ENC:...") are pushed back to the frontend.
+            // We catch this change and immediately re-mask it to "********".
             pluginSettings.password.subscribe(function (newValue) {
                 if (newValue && newValue.indexOf("ENC:") === 0) {
                     pluginSettings.password("********");
@@ -34,12 +47,18 @@ $(function () {
         self.scanError = ko.observable("");
         self.scanSuccess = ko.observable("");
 
+        // Check if the parent 'PSU Control' plugin is installed.
+        // We need this because we rely on it for the actual UI buttons (navbar) and logic hooks.
         self.isPSUControlInstalled = ko.pureComputed(function () {
             return self.settingsViewModel.settings &&
                 self.settingsViewModel.settings.plugins &&
                 self.settingsViewModel.settings.plugins.psucontrol;
         });
 
+        // Check if PSU Control is correctly configured to use THIS plugin.
+        // The user must manually select 'PSUControl-eWeLink' in the PSU Control settings
+        // for 'Switching Method' (and optionally 'Sensing Method').
+        // If they haven't done this, our plugin won't actually do anything.
         self.isPSUControlConfigured = ko.pureComputed(function () {
             // Safety check: ensure settings and psucontrol plugin settings exist
             if (!self.isPSUControlInstalled()) {
@@ -53,6 +72,7 @@ $(function () {
                 return true;
             }
 
+            // 1. Verify Switching Method is set to PLUGIN and the plugin is US
             var switchingOk = psu.switchingMethod() === "PLUGIN" && psu.switchingPlugin() === "psucontrol_ewelink";
 
             // For sensing, also check if configured (optional but recommended)
@@ -80,6 +100,8 @@ $(function () {
             return psu.sensingMethod() === "PLUGIN" && psu.sensingPlugin() === "psucontrol_ewelink";
         });
 
+        // "Test Connection" button handler.
+        // It calls the backend API 'get_devices' to verify credentials and fetch the available devices.
         self.testConnection = function () {
             self.scanning(true);
             self.scanError("");
@@ -92,14 +114,11 @@ $(function () {
             var password = pluginSettings.password();
 
             // Handle mask: if password is mask, send empty string to use stored password
+            // If the user hasn't changed the password field, it will be "********".
+            // We send "" to the backend, which tells it: "Use the password you already have stored/encrypted".
+            // If the user *did* type a new password, we send that plaintext (over SSL/TLS) for verification.
             if (password === "********") {
                 password = "";
-            }
-
-            if (!email || (!password && !pluginSettings.password())) { // Check logic: if password empty AND stored logic fails (masked)
-                // Actually if password is "" and original was mask, we are fine. 
-                // We just need to check if user has entered nothing AND it was not masked
-                // But simplified:
             }
 
             if (!email) {
@@ -110,25 +129,7 @@ $(function () {
                 return;
             }
 
-            if (!password && pluginSettings.password() !== "********") {
-                // Logic check: if password is empty string, it might be fallback. 
-                // But wait, we set password="" above if it was mask.
-                // So if password is "" here, it means we want backend fallback.
-                // But if the user CLEARED the box, password is "". 
-                // If the box was empty to begin with? 
-                // Let's rely on backend check or simple check here.
-            }
-
-            // Correct Logic:
-            // If password is still empty string here, it means it was mask (so we send empty) OR user typed nothing.
-            // If user typed nothing, backend will try stored. If stored is empty, backend fails.
-            // So we can send it freely.
-
-            if (!email || (!password && pluginSettings.password() !== "********" && !pluginSettings.password())) {
-                // This check is getting complex. Let's simplify and let backend valid.
-                // Actually, if we just check for email, that's enough, because password might be stored.
-            }
-
+            // Call the 'get_devices' command in the 'SimpleApiPlugin' mixin of our __init__.py
             OctoPrint.simpleApiCommand("psucontrol_ewelink", "get_devices", {
                 email: email,
                 password: password
@@ -171,6 +172,7 @@ $(function () {
                 });
         };
 
+        // When a user selects a device from the list, we update the setting immediately.
         self.selectDevice = function (device) {
             self.settingsViewModel.settings.plugins.psucontrol_ewelink.device_id(device.deviceid);
             // Optionally verify selection

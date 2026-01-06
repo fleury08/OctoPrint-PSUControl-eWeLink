@@ -1,3 +1,20 @@
+#
+# Test Suite for OctoPrint-PSUControl-eWeLink
+#
+# PURPOSE:
+# This file contains "Unit Tests". These are automated checks to verify that 
+# the plugin's logic works correctly in isolation. 
+#
+# IS THIS REQUIRED?
+# No. The plugin will function perfectly fine on a printer without this file.
+# However, it is HIGHLY RECOMMENDED for developers. It ensures that future changes
+# (like updates or bug fixes) don't accidentally break existing features.
+#
+# HOW IT WORKS:
+# Since we are running these tests on a computer that might not be a real OctoPrint server,
+# we have to "Mock" (fake) the OctoPrint and eWeLink dependencies.
+#
+
 import sys
 import unittest
 from unittest.mock import MagicMock, patch, AsyncMock
@@ -5,10 +22,13 @@ import types
 import asyncio
 
 # Mock flask before any import
+# OctoPrint uses Flask for its web server. We mock it here so we don't need a real web server running.
 mock_flask = MagicMock()
 sys.modules["flask"] = mock_flask
 
 # Create dummy modules
+# We create fake 'octoprint' and 'octoprint.plugin' modules so that when the plugin imports them,
+# it gets our empty mock objects instead of failing with "ImportError".
 mock_octoprint = types.ModuleType("octoprint")
 sys.modules["octoprint"] = mock_octoprint
 
@@ -67,6 +87,8 @@ mock_op_plugin.AssetPlugin = MockAssetPlugin
 mock_op_plugin.RestartNeedingPlugin = MockRestartNeedingPlugin
 
 # Mock ewelink module
+# The real eWeLink library makes actual network calls to the cloud.
+# We mock it here so our tests run instantly and don't actually toggle your real devices.
 mock_ewelink_lib = MagicMock()
 mock_ewelink_types = MagicMock()
 sys.modules["ewelink"] = mock_ewelink_lib
@@ -83,8 +105,16 @@ from octoprint_psucontrol_ewelink import PSUControlEWeLinkPlugin, __plugin_load_
 
 
 class TestPSUControlEWeLinkPlugin(unittest.TestCase):
+    """
+    The main test class. Each method starting with 'test_' becomes a separate check.
+    """
 
     def setUp(self):
+        """
+        Runs before EACH test method.
+        Creates a fresh instance of the plugin and replaces its internal components 
+        (logger, settings, manager) with Mocks so we can track how they are used.
+        """
         self.plugin = PSUControlEWeLinkPlugin()
         self.plugin._logger = MagicMock()
         self.plugin._settings = MagicMock()
@@ -244,6 +274,47 @@ class TestPSUControlEWeLinkPlugin(unittest.TestCase):
 
                 # Password should be encrypted
                 self.assertTrue(data["password"].startswith("ENC:"))
+
+
+    def test_on_api_command_get_devices_fallback(self):
+        """Test API get_devices uses stored credentials if not provided"""
+        # Data with empty password (simulating masked UI)
+        data = {"email": "", "password": ""}
+        
+        # Mock settings to return stored credentials
+        # side_effect: first call (email), second call (password)
+        def get_side_effect(args):
+            if args == ["email"]: return "stored@email.com"
+            if args == ["password"]: return "ENC:stored_pass"
+            return None
+        self.plugin._settings.get.side_effect = get_side_effect
+        
+        # Mock decrypt
+        self.plugin._decrypt_password = MagicMock(return_value="stored_pass")
+        
+        # Mock async runner and fetcher
+        self.plugin._run_coro = MagicMock(return_value=[{"name": "TestDevice"}])
+        self.plugin._async_fetch_devices = MagicMock()
+        
+        # Call command
+        response = self.plugin.on_api_command("get_devices", data)
+        
+        # Verify
+        self.plugin._async_fetch_devices.assert_called_with("stored@email.com", "stored_pass")
+        self.plugin._run_coro.assert_called()
+
+    def test_turn_psu_on_success(self):
+        """Test turn_psu_on calls toggle_device when connected"""
+        self.plugin._ewelink_app = MagicMock() # Connected
+        self.plugin._settings.get.return_value = "device123"
+        
+        self.plugin._run_coro = MagicMock()
+        self.plugin._toggle_device = MagicMock()
+        
+        self.plugin.turn_psu_on()
+        
+        self.plugin._toggle_device.assert_called_with("device123", "on")
+        self.plugin._run_coro.assert_called()
 
 
 class TestPluginLoad(unittest.TestCase):
