@@ -3,7 +3,7 @@
 Integrate [eWeLink](https://ewelink.cc/) smart switches (Sonoff, etc.) with [OctoPrint-PSUControl](https://github.com/kantlivelong/OctoPrint-PSUControl) to turn your 3D printer on and off.
 
 <p align="center">
-  <img src="assets/img/settings_screenshot.png" alt="Plugin Settings Screenshot" width="60%">
+  <img src="assets/img/plugins/psucontrol_ewelink/settings_screenshot.png" alt="Plugin Settings Screenshot" width="60%">
 </p>
 
 > [!WARNING]
