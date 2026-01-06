@@ -171,13 +171,17 @@ def _run_coro(self, coro):
     return future.result(timeout=10)
 ```
 
-### `_async_connect(email, password, region, device_id)`
+### `_init_ewelink()`
 
-Establishes connection to eWeLink cloud.
+Initializes or re-initializes the eWeLink connection using stored settings. Called on startup and after settings are saved.
 
-### `_async_fetch_devices(email, password, region)`
+### `_async_connect(email, password, device_id)`
 
-Fetches device list for "Test Connection" feature.
+Establishes connection to eWeLink cloud. Region is auto-detected by the API.
+
+### `_async_fetch_devices(email, password)`
+
+Fetches device list for "Test Connection" feature. Region is auto-detected by the API.
 
 ### `_toggle_device(device_id, state)`
 
