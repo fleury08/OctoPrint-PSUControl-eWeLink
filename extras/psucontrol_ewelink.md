@@ -26,16 +26,15 @@ tags:
 - ewelink
 - smart home
 - automation
+- psucontrol subplugin
 
 compatibility:
   octoprint:
   - 1.3.10
   
   os:
-  - linux
+  - posix
   - windows
-  - macos
-  - freebsd
   
   python: ">=3.7,<4"
 
