@@ -1,4 +1,9 @@
 <form class="form-horizontal">
+    <div class="alert alert-error" data-bind="visible: !isPSUControlInstalled()">
+        <strong>Missing Requirement:</strong> PSU Control plugin is not installed! 
+        This plugin requires <a href="https://plugins.octoprint.org/plugins/psucontrol/" target="_blank">PSU Control</a> to function. 
+        Please install it via the Plugin Manager.
+    </div>
     <div class="alert alert-warning" data-bind="visible: !isPSUControlConfigured()">
         <strong>Configuration Required:</strong> PSU Control is not configured to use this plugin. 
         Please go to PSU Control settings, set <strong>Switching Method</strong> to <strong>Plugin</strong>, 

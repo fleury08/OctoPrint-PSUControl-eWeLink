@@ -2,6 +2,12 @@
 
 All notable changes to this project are documented in this file.
 
+## [1.0.1] - 2026-01-06
+
+### Fixed
+- **Configuration** - Added a prominent error message when the required `OctoPrint-PSUControl` plugin is missing.
+- **Documentation** - Updated troubleshooting guide with "Missing Requirement" error.
+
 ## [1.0.0] - 2026-01-06
 
 Initial public release.

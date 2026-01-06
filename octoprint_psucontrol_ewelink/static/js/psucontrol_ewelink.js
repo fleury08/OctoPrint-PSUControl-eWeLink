@@ -34,12 +34,16 @@ $(function () {
         self.scanError = ko.observable("");
         self.scanSuccess = ko.observable("");
 
+        self.isPSUControlInstalled = ko.pureComputed(function () {
+            return self.settingsViewModel.settings &&
+                self.settingsViewModel.settings.plugins &&
+                self.settingsViewModel.settings.plugins.psucontrol;
+        });
+
         self.isPSUControlConfigured = ko.pureComputed(function () {
             // Safety check: ensure settings and psucontrol plugin settings exist
-            if (!self.settingsViewModel.settings ||
-                !self.settingsViewModel.settings.plugins ||
-                !self.settingsViewModel.settings.plugins.psucontrol) {
-                return true; // Don't show warning if we can't verify (or if PSUControl missing)
+            if (!self.isPSUControlInstalled()) {
+                return true; // Don't show warning if we can't verify (or if PSUControl missing) -- handled by isPSUControlInstalled warning
             }
 
             var psu = self.settingsViewModel.settings.plugins.psucontrol;

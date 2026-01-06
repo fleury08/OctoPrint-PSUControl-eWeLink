@@ -12,6 +12,20 @@ Before diving into specific issues, check:
 
 ---
 
+## Error: "Missing Requirement: PSU Control plugin is not installed!"
+
+**Symptom:** Red warning banner appears in plugin settings.
+
+**Cause:** The required dependency **OctoPrint-PSUControl** is not installed.
+
+**Solution:**
+1. Open **OctoPrint Settings** → **Plugin Manager** → **Get More**
+2. Search for `PSU Control`
+3. Click **Install**
+4. Restart OctoPrint
+
+---
+
 ## Error: "PSU Control is not configured to use this plugin"
 
 **Symptom:** Yellow warning banner appears in plugin settings.
