@@ -67,6 +67,8 @@ Releases are automated via GitHub Actions. To create a new release:
 
 You can also trigger a release manually from the **Actions** tab → **Release** → **Run workflow**.
 
+> **Note**: The plugin registry metadata is in a separate repo: [`plugins.octoprint.org/_plugins/psucontrol_ewelink.md`](https://github.com/OctoPrint/plugins.octoprint.org). Update it when changing plugin description, compatibility, or screenshots.
+
 ## Documentation
 
 | Document | Description |
