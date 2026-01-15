@@ -54,6 +54,19 @@ This plugin takes security seriously:
 *   **UI Masking**: Passwords are masked (`********`) in the settings UI and stripped from the browser memory.
 *   **Secure API**: Credentials are transmitted to the eWeLink API over HTTPS.
 
+## Releasing
+
+Releases are automated via GitHub Actions. To create a new release:
+
+1. **Bump the version** in `setup.py` (line 17: `plugin_version = "X.X.X"`)
+2. **Update** `docs/CHANGELOG.md` with release notes
+3. **Push to main** - the workflow automatically:
+   - Runs unit tests
+   - Creates a GitHub release with the version tag
+   - Generates release notes
+
+You can also trigger a release manually from the **Actions** tab → **Release** → **Run workflow**.
+
 ## Documentation
 
 | Document | Description |

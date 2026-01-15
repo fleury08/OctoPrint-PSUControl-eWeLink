@@ -2,6 +2,19 @@
 
 All notable changes to this project are documented in this file.
 
+## [1.0.4] - 2026-01-16
+
+### Security
+- **API Protection** - Added `is_api_adminonly()` to restrict API access to admin users only
+- **XSS Prevention** - Added `text_escape: true` to all PNotify notifications to prevent XSS from untrusted cloud data (device names, error messages)
+
+### Changed
+- **Terminology** - Rebranded "encryption" to "obfuscation" throughout documentation to honestly describe XOR-based password protection
+
+### Documentation
+- **README** - Added release process instructions
+- **SECURITY.md** - Clarified that storage protection prevents casual exposure, not targeted attacks
+
 ## [1.0.3] - 2026-01-07
 
 ### Maintenance
