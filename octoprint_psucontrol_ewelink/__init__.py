@@ -248,6 +248,10 @@ class PSUControlEWeLinkPlugin(octoprint.plugin.StartupPlugin,
 
     # SimpleApiPlugin
 
+    def is_api_adminonly(self):
+        """Restrict API access to admin users only for security."""
+        return True
+
     def get_api_commands(self):
         return dict(
             get_devices=["email", "password"]
