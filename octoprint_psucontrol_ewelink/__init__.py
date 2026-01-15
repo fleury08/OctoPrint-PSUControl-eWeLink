@@ -43,9 +43,7 @@ class PSUControlEWeLinkPlugin(octoprint.plugin.StartupPlugin,
         self._loop_thread = None
         self._salt = None
 
-    ##~~ Encryption Helpers
-
-    ##~~ Encryption Helpers
+    ##~~ Obfuscation Helpers
 
     def _get_salt(self):
         """

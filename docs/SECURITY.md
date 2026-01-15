@@ -9,7 +9,7 @@ The plugin handles sensitive credentials (eWeLink email and password). Multiple 
 | Layer | Protection |
 |-------|------------|
 | **UI** | Password field masked with `********` |
-| **Storage** | XOR obfuscation with unique salt |
+| **Storage** | XOR obfuscation with unique salt (prevents casual exposure) |
 | **Transmission** | POST requests (not GET with URL params) |
 | **API** | HTTPS to eWeLink cloud |
 

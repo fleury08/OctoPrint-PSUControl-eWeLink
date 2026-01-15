@@ -50,7 +50,7 @@ Integrate [eWeLink](https://ewelink.cc/) smart switches (Sonoff, etc.) with [Oct
 ## Security
 
 This plugin takes security seriously:
-*   **Encrypted Storage**: Credentials are NOT stored in plain text. They are scrambled using a local salt (XOR Obfuscation) in `config.yaml`.
+*   **Obfuscated Storage**: Credentials are NOT stored in plain text. They are obfuscated using XOR with a local salt in `config.yaml` to prevent casual exposure.
 *   **UI Masking**: Passwords are masked (`********`) in the settings UI and stripped from the browser memory.
 *   **Secure API**: Credentials are transmitted to the eWeLink API over HTTPS.
 

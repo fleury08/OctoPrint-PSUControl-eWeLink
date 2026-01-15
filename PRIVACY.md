@@ -16,8 +16,8 @@ This plugin collects and transmits the following data to eWeLink's cloud servers
 
 ### Local Storage
 - Credentials are stored locally in OctoPrint's `config.yaml` file
-- Passwords are encrypted using XOR obfuscation with a randomly generated local salt
-- The encryption salt is stored in the plugin's data folder
+- Passwords are obfuscated using XOR with a randomly generated local salt
+- The obfuscation salt is stored in the plugin's data folder
 - No plaintext passwords are stored
 
 ### External Storage

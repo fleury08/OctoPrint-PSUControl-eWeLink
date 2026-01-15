@@ -58,7 +58,7 @@ Integrate [eWeLink](https://ewelink.cc/) smart switches (Sonoff, etc.) with [Oct
 - **Cloud Integration**: Control any eWeLink-compatible device (Sonoff Basic, S26, etc.)
 - **Device Discovery**: Test connection and browse devices directly in OctoPrint settings
 - **State Sensing**: Real-time feedback on switch state
-- **Secure Credentials**: Passwords are encrypted locally using XOR obfuscation
+- **Secure Credentials**: Passwords are obfuscated locally using XOR with a unique salt
 
 ## Requirements
 
