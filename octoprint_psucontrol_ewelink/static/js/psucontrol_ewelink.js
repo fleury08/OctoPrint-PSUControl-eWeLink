@@ -125,7 +125,7 @@ $(function () {
                 var err = "Please enter Email.";
                 self.scanError(err);
                 self.scanning(false);
-                new PNotify({ title: 'Error', text: err, type: 'error' });
+                new PNotify({ title: 'Error', text: err, type: 'error', text_escape: true });
                 return;
             }
 
@@ -141,7 +141,8 @@ $(function () {
                             title: 'eWeLink Error',
                             text: response.error,
                             type: 'error',
-                            hide: false
+                            hide: false,
+                            text_escape: true
                         });
                     } else if (response.devices) {
                         self.deviceList(response.devices);
@@ -150,7 +151,8 @@ $(function () {
                         new PNotify({
                             title: 'eWeLink Connected',
                             text: successMsg,
-                            type: 'success'
+                            type: 'success',
+                            text_escape: true
                         });
                     }
                 })
@@ -164,7 +166,8 @@ $(function () {
                         title: 'Connection Failed',
                         text: msg,
                         type: 'error',
-                        hide: false
+                        hide: false,
+                        text_escape: true
                     });
                 })
                 .always(function () {
@@ -179,7 +182,8 @@ $(function () {
             new PNotify({
                 title: 'Device Selected',
                 text: 'Selected ' + device.name + ' (' + device.deviceid + ')',
-                type: 'info'
+                type: 'info',
+                text_escape: true
             });
         };
     }
