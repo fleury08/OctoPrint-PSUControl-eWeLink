@@ -146,7 +146,9 @@ Follow these rules to maintain the stability of the plugin:
     *   eWeLink is **Asynchronous**.
     *   **Rule**: Never call `asyncio.run()` directly in the main thread. Always use `self._run_coro()` or spawn a separate thread.
 3.  **Credential Safety**: Never log the raw password. Use `_encrypt_password` immediately upon save, and `_decrypt_password` only when needed for the API connection.
-4.  **Documentation**: If you add a feature, update `API.md` and add a test case.
+4.  **PNotify XSS Safety**: OctoPrint ships PNotify v3, which renders HTML by default. Always use `text_escape: true` when displaying untrusted data (device names, error messages).
+5.  **Plugin Registry Sync**: The file `extras/psucontrol_ewelink.md` should match `plugins.octoprint.org/_plugins/psucontrol_ewelink.md`. Update both when changing description, features, or compatibility.
+6.  **Documentation**: If you add a feature, update `API.md` and add a test case.
 
 ## 12. Documentation Index
 
