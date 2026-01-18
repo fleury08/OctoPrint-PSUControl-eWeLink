@@ -26,6 +26,7 @@ class PSUControlEWeLinkPlugin(
         octoprint.plugin.SettingsPlugin,
         octoprint.plugin.SimpleApiPlugin,
         octoprint.plugin.AssetPlugin,
+        octoprint.plugin.TranslationPlugin,
         octoprint.plugin.RestartNeedingPlugin):
     """
     Main Plugin Class.

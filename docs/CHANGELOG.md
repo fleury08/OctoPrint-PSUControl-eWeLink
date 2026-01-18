@@ -2,6 +2,11 @@
 
 All notable changes to this project are documented in this file.
 
+## [1.0.8] - 2026-01-18
+
+### Fixed
+- Fixed missing `TranslationPlugin` inheritance, which prevented translations from loading.
+
 ## [1.0.7] - 2026-01-18
 
 ### Added
