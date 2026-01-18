@@ -7,7 +7,7 @@ version: "3"
 
 env:
   # List of locales to maintain. Add new languages here, e.g. ["el", "de", "fr"]
-  LOCALES: ["el"]
+  LOCALES: ["el", "fr"]
   TRANSLATIONS: octoprint_psucontrol_ewelink/translations  # translations folder
 
 tasks:

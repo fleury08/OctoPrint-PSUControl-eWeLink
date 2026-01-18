@@ -2,6 +2,14 @@
 
 All notable changes to this project are documented in this file.
 
+## [1.0.12] - 2026-01-18
+
+### Added
+- French (`fr`) translation.
+
+### Fixed
+- Updated Greek (`el`) translation.
+
 ## [1.0.11] - 2026-01-18
 
 ### Fixed
