@@ -26,6 +26,12 @@ import asyncio
 mock_flask = MagicMock()
 sys.modules["flask"] = mock_flask
 
+# Mock flask_babel
+# Used for translations (gettext). We mock it to avoid installing the dependency for tests.
+mock_flask_babel = MagicMock()
+mock_flask_babel.gettext = lambda x: x
+sys.modules["flask_babel"] = mock_flask_babel
+
 # Create dummy modules
 # We create fake 'octoprint' and 'octoprint.plugin' modules so that when the plugin imports them,
 # it gets our empty mock objects instead of failing with "ImportError".
