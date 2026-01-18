@@ -40,7 +40,14 @@ class PSUControlEWeLinkPlugin(
     - Bridges synchronous OctoPrint calls (from PSU Control) to the async loop.
     """
 
-    def __init__(self):
+    def initialize(self):
+        """
+        OctoPrint Lifecycle Hook:
+        This method is automatically called by OctoPrint after the plugin has been
+        fully initialized and all injected properties (self._settings, self._logger, etc.)
+        are available. We use this instead of __init__ to ensure safe access to these 
+        properties and correct mixin initialization.
+        """
         self._ewelink_app = None
         self._loop = None
         self._loop_thread = None

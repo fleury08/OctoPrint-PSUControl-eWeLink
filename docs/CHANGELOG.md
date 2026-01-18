@@ -2,6 +2,12 @@
 
 All notable changes to this project are documented in this file.
 
+## [1.0.9] - 2026-01-18
+
+### Fixed
+- Migrated plugin initialization from `__init__` to `initialize` to correct inheritance issues with `TranslationPlugin`.
+- Fixed "Plugin disappeared" issue caused by overridden constructor.
+
 ## [1.0.8] - 2026-01-18
 
 ### Fixed
