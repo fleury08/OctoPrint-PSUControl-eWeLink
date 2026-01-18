@@ -2,6 +2,16 @@
 
 All notable changes to this project are documented in this file.
 
+## [1.0.5] - 2026-01-18
+
+### Added
+- **EditorConfig** - Added `.editorconfig` for consistent code style across editors
+- **MANIFEST.in** - Added manifest file for proper PyPI source distribution packaging
+- **GitHub Issue Templates** - Added structured bug report and feature request forms
+
+### Maintenance
+- **Code Style** - Fixed all files for editorconfig compliance (trailing whitespace, tabs→spaces, indentation)
+
 ## [1.0.4] - 2026-01-16
 
 ### Security
