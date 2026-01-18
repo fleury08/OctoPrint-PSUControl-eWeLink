@@ -6,13 +6,40 @@ description: Start a new conversation about the PSUControl-eWeLink plugin with f
 
 **Project:** OctoPrint plugin integrating eWeLink smart switches (Sonoff, etc.) with PSU Control
 
+## Project Structure
+
+```
+ewelink-psucontrol/                    # Parent workspace directory
+├── OctoPrint-PSUControl-eWeLink/      # Main plugin repository
+│   ├── octoprint_psucontrol_ewelink/  # Plugin Python package
+│   ├── extras/psucontrol_ewelink.md   # Local copy of registry metadata
+│   ├── docs/                          # Documentation
+│   └── setup.py                       # Version & dependencies
+│
+└── plugins.octoprint.org/             # Official OctoPrint plugin registry (fork)
+    └── _plugins/psucontrol_ewelink.md # Registry metadata (submit via PR)
+```
+
 ## Quick Links
 
 | Resource | Path |
 |----------|------|
 | **Main Plugin** | `@[OctoPrint-PSUControl-eWeLink]` |
-| **Plugin Registry** | `../plugins.octoprint.org/_plugins/psucontrol_ewelink.md` |
+| **Plugin Registry (local)** | `extras/psucontrol_ewelink.md` |
+| **Plugin Registry (official)** | `../plugins.octoprint.org/_plugins/psucontrol_ewelink.md` |
 | **OctoPrint Instance** | http://octopi.tail01e1b4.ts.net/ |
+
+## Files That Must Stay in Sync
+
+When changing these values, update **all** locations:
+
+| Value | Files to Update |
+|-------|-----------------|
+| **Python version** | `setup.py`, `__init__.py` (`__plugin_pythoncompat__`), `extras/psucontrol_ewelink.md`, `plugins.octoprint.org/.../psucontrol_ewelink.md`, `docs/TROUBLESHOOTING.md` |
+| **Plugin version** | `setup.py` (line 17), `docs/CHANGELOG.md` |
+| **Description/features** | `extras/psucontrol_ewelink.md`, `plugins.octoprint.org/.../psucontrol_ewelink.md`, `README.md` |
+| **Dependencies** | `setup.py` (`plugin_requires`) |
+| **OctoPrint compatibility** | `extras/psucontrol_ewelink.md`, `plugins.octoprint.org/.../psucontrol_ewelink.md` |
 
 ## Core Files
 
