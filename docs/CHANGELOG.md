@@ -2,7 +2,7 @@
 
 All notable changes to this project are documented in this file.
 
-## [1.0.5] - 2026-01-18
+## [1.0.6] - 2026-01-18
 
 ### Added
 - **EditorConfig** - Added `.editorconfig` for consistent code style across editors
