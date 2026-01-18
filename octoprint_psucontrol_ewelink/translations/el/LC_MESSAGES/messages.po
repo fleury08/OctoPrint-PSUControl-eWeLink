@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: i18n@octoprint.org\n"
-"POT-Creation-Date: 2026-01-18 13:22+0200\n"
+"POT-Creation-Date: 2026-01-18 13:42+0200\n"
 "PO-Revision-Date: 2026-01-18 13:22+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: el\n"
@@ -18,157 +18,165 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.17.0\n"
 
-#: octoprint_psucontrol_ewelink/__init__.py:301
+#. NOTE: Error message when API command is not recognized
+#: octoprint_psucontrol_ewelink/__init__.py:302
 msgid "Unknown command"
-msgstr ""
+msgstr "Άγνωστη εντολή"
 
-#: octoprint_psucontrol_ewelink/__init__.py:322
+#. NOTE: Error message showing the specific exception error
+#: octoprint_psucontrol_ewelink/__init__.py:324
 #, python-format
 msgid "Connection failed: %(error)s"
-msgstr ""
+msgstr "Αποτυχία σύνδεσης: %(error)s"
 
-#: octoprint_psucontrol_ewelink/static/js/psucontrol_ewelink.js:125
+#. NOTE: Error message shown when email field is empty
+#: octoprint_psucontrol_ewelink/static/js/psucontrol_ewelink.js:126
 msgid "Please enter Email."
-msgstr ""
+msgstr "Παρακαλώ εισάγετε Email."
 
-#: octoprint_psucontrol_ewelink/static/js/psucontrol_ewelink.js:141
+#. NOTE: Title of error notification
+#: octoprint_psucontrol_ewelink/static/js/psucontrol_ewelink.js:143
 msgid "eWeLink Error"
-msgstr ""
+msgstr "Σφάλμα eWeLink"
 
-#: octoprint_psucontrol_ewelink/static/js/psucontrol_ewelink.js:149
+#. NOTE: Status message showing number of devices found
+#: octoprint_psucontrol_ewelink/static/js/psucontrol_ewelink.js:152
 #, python-format
 msgid "Found %(count)d devices!"
-msgstr ""
+msgstr "Βρέθηκαν %(count)d συσκευές!"
 
-#: octoprint_psucontrol_ewelink/static/js/psucontrol_ewelink.js:152
+#. NOTE: Title of success notification
+#: octoprint_psucontrol_ewelink/static/js/psucontrol_ewelink.js:156
 msgid "eWeLink Connected"
-msgstr ""
+msgstr "Το eWeLink Συνδέθηκε"
 
-#: octoprint_psucontrol_ewelink/static/js/psucontrol_ewelink.js:160
+#. NOTE: Generic error message when API request fails
+#: octoprint_psucontrol_ewelink/static/js/psucontrol_ewelink.js:165
 msgid "API Request failed"
-msgstr ""
+msgstr "Το Αίτημα API απέτυχε"
 
-#: octoprint_psucontrol_ewelink/static/js/psucontrol_ewelink.js:166
+#. NOTE: Title of connection failure notification
+#: octoprint_psucontrol_ewelink/static/js/psucontrol_ewelink.js:172
 msgid "Connection Failed"
-msgstr ""
+msgstr "Αποτυχία Σύνδεσης"
 
-#: octoprint_psucontrol_ewelink/static/js/psucontrol_ewelink.js:183
+#. NOTE: Title of device selection notification
+#: octoprint_psucontrol_ewelink/static/js/psucontrol_ewelink.js:190
 msgid "Device Selected"
-msgstr ""
+msgstr "Η Συσκευή Επιλέχθηκε"
 
-#: octoprint_psucontrol_ewelink/static/js/psucontrol_ewelink.js:184
+#. NOTE: Notification text confirming device selection
+#: octoprint_psucontrol_ewelink/static/js/psucontrol_ewelink.js:192
 #, python-format
 msgid "Selected %(name)s (%(id)s)"
-msgstr ""
+msgstr "Επιλέχθηκε %(name)s (%(id)s)"
 
-#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:21
-msgid "Missing Requirement:"
-msgstr ""
-
-#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:21
+#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:22
 msgid "PSU Control plugin is not installed!"
-msgstr ""
+msgstr "Το πρόσθετο PSU Control δεν είναι εγκατεστημένο!"
 
-#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:22
+#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:24
 msgid "This plugin requires"
-msgstr ""
+msgstr "Αυτό το πρόσθετο απαιτεί"
 
-#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:22
+#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:24
 msgid "to function."
-msgstr ""
+msgstr "για να λειτουργήσει."
 
-#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:23
+#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:26
 msgid "Please install it via the Plugin Manager."
-msgstr ""
+msgstr "Παρακαλώ εγκαταστήστε το μέσω του Plugin Manager."
 
-#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:26
+#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:30
 msgid "Configuration Required:"
-msgstr ""
+msgstr "Απαιτείται Ρύθμιση:"
 
-#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:26
+#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:30
 msgid "PSU Control is not configured to use this plugin."
-msgstr ""
+msgstr "Το PSU Control δεν έχει ρυθμιστεί για χρήση αυτού του plugin."
 
-#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:27
+#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:32
 msgid "Please go to PSU Control settings, set"
-msgstr ""
+msgstr "Πηγαίνετε στις ρυθμίσεις του PSU Control, ορίστε"
 
-#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:27
+#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:32
 msgid "Switching Method"
-msgstr ""
+msgstr "Μέθοδος Εναλλαγής"
 
-#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:27
-#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:31
+#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:32
+#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:37
 msgid "to"
-msgstr ""
+msgstr "σε"
 
-#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:27
-#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:31
+#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:32
+#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:37
 msgid "Plugin"
-msgstr ""
+msgstr "Plugin"
 
-#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:28
-#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:32
+#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:33
+#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:38
 msgid "and select"
-msgstr ""
+msgstr "και επιλέξτε"
 
-#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:31
+#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:37
 msgid "Tip:"
-msgstr ""
+msgstr "Συμβουλή:"
 
-#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:31
+#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:37
 msgid "For real-time switch state updates, set"
-msgstr ""
+msgstr "Για ενημερώσεις κατάστασης διακόπτη σε πραγματικό χρόνο, ορίστε"
 
-#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:31
+#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:37
 msgid "Sensing Method"
-msgstr ""
+msgstr "Μέθοδος Ανίχνευσης"
 
-#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:32
+#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:38
 msgid "in PSU Control settings."
-msgstr ""
+msgstr "στις ρυθμίσεις του PSU Control."
 
-#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:36
+#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:43
 msgid "eWeLink Credentials"
-msgstr ""
+msgstr "Διαπιστευτήρια eWeLink"
 
-#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:44
+#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:52
 msgid "Email"
-msgstr ""
+msgstr "Email"
 
-#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:50
+#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:59
 msgid "Password"
-msgstr ""
-
-#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:68
-msgid "Test Connection / Get Devices"
-msgstr ""
-
-#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:69
-msgid "Scanning..."
-msgstr ""
-
-#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:76
-msgid "Device Configuration"
-msgstr ""
+msgstr "Κωδικός"
 
 #: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:78
+msgid "Test Connection / Get Devices"
+msgstr "Δοκιμή Σύνδεσης / Λήψη Συσκευών"
+
+#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:80
+msgid "Scanning..."
+msgstr "Σάρωση..."
+
+#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:88
+msgid "Device Configuration"
+msgstr "Ρύθμιση Συσκευής"
+
+#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:91
 msgid "Device ID"
-msgstr ""
+msgstr "ID Συσκευής"
 
-#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:93
+#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:106
 msgid "Found Devices:"
-msgstr ""
+msgstr "Βρέθηκαν Συσκευές:"
 
-#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:96
+#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:110
 msgid "Select Device"
-msgstr ""
+msgstr "Επιλογή Συσκευής"
 
-#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:104
+#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:119
 msgid "Online"
-msgstr ""
+msgstr "Online"
 
-#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:105
+#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:121
 msgid "Offline"
-msgstr ""
+msgstr "Offline"
 
+#~ msgid "Missing Requirement:"
+#~ msgstr "Απαιτείται Ρύθμιση:"
