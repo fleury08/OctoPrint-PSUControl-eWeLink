@@ -2,6 +2,12 @@
 
 All notable changes to this project are documented in this file.
 
+## [1.0.13] - 2026-01-18
+
+### Fixed
+- **Critical**: Re-bundled all translations (Greek & French) to ensure they are included in the release zip.
+- Updated `TRANSLATIONS.md` with explicit release instructions to prevent future missing file issues.
+
 ## [1.0.12] - 2026-01-18
 
 ### Added

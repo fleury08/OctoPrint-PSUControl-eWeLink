@@ -120,20 +120,30 @@ If the source code changes, you need to sync your translation file:
 
 ## 📦 Release Preparation
 
-**Critical Step**: Because most users install OctoPrint plugins directly from the GitHub source code (zip), you **must commit** the compiled translation files to the repository. The GitHub Action does *not* modify the source zip.
+> [!CAUTION]
+> **TRANSLATIONS WILL BREAK IF YOU SKIP THIS!**
+> GitHub releases pull the Source Code zip directly. If you do not commit the **compiled** `messages.mo` files, users will see English (or broken placeholders).
 
 Before creating a release (or pushing a release tag):
 
 1.  **Compile & Bundle**:
+    Run this to generate the `.mo` files and copy them to the package folder:
     ```bash
     task babel-compile babel-bundle
     ```
-2.  **Commit**:
+
+2.  **COMMIT EVERYTHING**:
+    The compiled files are binaries inside `octoprint_psucontrol_ewelink/translations/`. You **MUST** force `git` to see them if they aren't tracked yet, or just use `git add .`:
     ```bash
-    git add octoprint_psucontrol_ewelink/translations
-    git commit -m "chore: Update compiled translations for release"
+    git add .
+    git commit -m "chore: Update translations for release"
     ```
-3.  **Push**: Then proceed with your release workflow.
+
+3.  **Push**:
+    ```bash
+    git push origin main
+    ```
+    (Then proceed with bumping version/changelog if not already done).
 
 ---
 
