@@ -2,6 +2,25 @@
 
 All notable changes to this project are documented in this file.
 
+## [1.0.7] - 2026-01-18
+
+### Added
+- **Internationalization (i18n)** infrastructure:
+    - Added `babel.cfg` and `Taskfile.yml` for translation management.
+    - Marked all user-facing strings for translation in Python, JavaScript, and Jinja2 files.
+    - Added Greek (`el`) translation.
+- **Documentation**:
+    - Added comprehensive [Translation Guide](TRANSLATIONS.md).
+    - Standardized documentation footers and cross-linking.
+    - Added "Translations" to README and DEVELOPMENT guides.
+
+### Changed
+- Improved context comments in source code to aid future translators.
+- Updated `MANIFEST.in` to include translation files and documentation.
+
+### Fixed
+- Fixed duplicate legend tag in settings template.
+
 ## [1.0.6] - 2026-01-18
 
 ### Added
@@ -67,5 +86,5 @@ Initial public release.
 
 ---
 
-📚 **More docs:** [README](../README.md) · [Troubleshooting](TROUBLESHOOTING.md) · [Security](SECURITY.md) · [API](API.md) · [Architecture](ARCHITECTURE.md) · [Development](DEVELOPMENT.md)
+📚 **More docs:** [README](../README.md) · [Troubleshooting](TROUBLESHOOTING.md) · [Security](SECURITY.md) · [API](API.md) · [Architecture](ARCHITECTURE.md) · [Development](DEVELOPMENT.md) · [Translations](TRANSLATIONS.md)
 - Privacy Policy for cloud service usage

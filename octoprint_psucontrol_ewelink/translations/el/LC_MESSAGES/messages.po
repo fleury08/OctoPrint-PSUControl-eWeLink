@@ -1,0 +1,174 @@
+# Greek translations for PROJECT.
+# Copyright (C) 2026 The OctoPrint Project
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: i18n@octoprint.org\n"
+"POT-Creation-Date: 2026-01-18 13:22+0200\n"
+"PO-Revision-Date: 2026-01-18 13:22+0200\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: el\n"
+"Language-Team: el <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: octoprint_psucontrol_ewelink/__init__.py:301
+msgid "Unknown command"
+msgstr ""
+
+#: octoprint_psucontrol_ewelink/__init__.py:322
+#, python-format
+msgid "Connection failed: %(error)s"
+msgstr ""
+
+#: octoprint_psucontrol_ewelink/static/js/psucontrol_ewelink.js:125
+msgid "Please enter Email."
+msgstr ""
+
+#: octoprint_psucontrol_ewelink/static/js/psucontrol_ewelink.js:141
+msgid "eWeLink Error"
+msgstr ""
+
+#: octoprint_psucontrol_ewelink/static/js/psucontrol_ewelink.js:149
+#, python-format
+msgid "Found %(count)d devices!"
+msgstr ""
+
+#: octoprint_psucontrol_ewelink/static/js/psucontrol_ewelink.js:152
+msgid "eWeLink Connected"
+msgstr ""
+
+#: octoprint_psucontrol_ewelink/static/js/psucontrol_ewelink.js:160
+msgid "API Request failed"
+msgstr ""
+
+#: octoprint_psucontrol_ewelink/static/js/psucontrol_ewelink.js:166
+msgid "Connection Failed"
+msgstr ""
+
+#: octoprint_psucontrol_ewelink/static/js/psucontrol_ewelink.js:183
+msgid "Device Selected"
+msgstr ""
+
+#: octoprint_psucontrol_ewelink/static/js/psucontrol_ewelink.js:184
+#, python-format
+msgid "Selected %(name)s (%(id)s)"
+msgstr ""
+
+#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:21
+msgid "Missing Requirement:"
+msgstr ""
+
+#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:21
+msgid "PSU Control plugin is not installed!"
+msgstr ""
+
+#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:22
+msgid "This plugin requires"
+msgstr ""
+
+#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:22
+msgid "to function."
+msgstr ""
+
+#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:23
+msgid "Please install it via the Plugin Manager."
+msgstr ""
+
+#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:26
+msgid "Configuration Required:"
+msgstr ""
+
+#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:26
+msgid "PSU Control is not configured to use this plugin."
+msgstr ""
+
+#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:27
+msgid "Please go to PSU Control settings, set"
+msgstr ""
+
+#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:27
+msgid "Switching Method"
+msgstr ""
+
+#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:27
+#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:31
+msgid "to"
+msgstr ""
+
+#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:27
+#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:31
+msgid "Plugin"
+msgstr ""
+
+#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:28
+#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:32
+msgid "and select"
+msgstr ""
+
+#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:31
+msgid "Tip:"
+msgstr ""
+
+#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:31
+msgid "For real-time switch state updates, set"
+msgstr ""
+
+#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:31
+msgid "Sensing Method"
+msgstr ""
+
+#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:32
+msgid "in PSU Control settings."
+msgstr ""
+
+#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:36
+msgid "eWeLink Credentials"
+msgstr ""
+
+#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:44
+msgid "Email"
+msgstr ""
+
+#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:50
+msgid "Password"
+msgstr ""
+
+#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:68
+msgid "Test Connection / Get Devices"
+msgstr ""
+
+#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:69
+msgid "Scanning..."
+msgstr ""
+
+#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:76
+msgid "Device Configuration"
+msgstr ""
+
+#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:78
+msgid "Device ID"
+msgstr ""
+
+#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:93
+msgid "Found Devices:"
+msgstr ""
+
+#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:96
+msgid "Select Device"
+msgstr ""
+
+#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:104
+msgid "Online"
+msgstr ""
+
+#: octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2:105
+msgid "Offline"
+msgstr ""
+

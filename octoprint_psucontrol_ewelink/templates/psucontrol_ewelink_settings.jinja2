@@ -18,22 +18,29 @@
         from the ViewModel to warn the user if the parent "PSU Control" plugin is missing or not linked.
     -->
     <div class="alert alert-error" data-bind="visible: !isPSUControlInstalled()">
-        <strong>Missing Requirement:</strong> PSU Control plugin is not installed!
-        This plugin requires <a href="https://plugins.octoprint.org/plugins/psucontrol/" target="_blank">PSU Control</a> to function.
-        Please install it via the Plugin Manager.
+        {# NOTE: Alert header shown when the required PSU Control plugin is missing #}
+        {{ _('PSU Control plugin is not installed!') }}
+        {# NOTE: Message explaining dependency #}
+        {{ _('This plugin requires') }} <a href="https://plugins.octoprint.org/plugins/psucontrol/" target="_blank">PSU Control</a> {{ _('to function.') }}
+        {# NOTE: Instruction to install dependency #}
+        {{ _('Please install it via the Plugin Manager.') }}
     </div>
     <div class="alert alert-warning" data-bind="visible: !isPSUControlConfigured()">
-        <strong>Configuration Required:</strong> PSU Control is not configured to use this plugin.
-        Please go to PSU Control settings, set <strong>Switching Method</strong> to <strong>Plugin</strong>,
-        and select <strong>PSU Control - eWeLink</strong>.
+        {# NOTE: Alert header when plugin is not configured in PSU Control settings #}
+        <strong>{{ _('Configuration Required:') }}</strong> {{ _('PSU Control is not configured to use this plugin.') }}
+        {# NOTE: Instructions to configure PSU Control switching method #}
+        {{ _('Please go to PSU Control settings, set') }} <strong>{{ _('Switching Method') }}</strong> {{ _('to') }} <strong>{{ _('Plugin') }}</strong>,
+        {{ _('and select') }} <strong>PSU Control - eWeLink</strong>.
     </div>
     <div class="alert alert-info" data-bind="visible: isPSUControlConfigured() && !isSensingConfigured()">
-        <strong>Tip:</strong> For real-time switch state updates, set <strong>Sensing Method</strong> to <strong>Plugin</strong>
-        and select <strong>PSU Control - eWeLink</strong> in PSU Control settings.
+        {# NOTE: Tip for enabling sensing method #}
+        <strong>{{ _('Tip:') }}</strong> {{ _('For real-time switch state updates, set') }} <strong>{{ _('Sensing Method') }}</strong> {{ _('to') }} <strong>{{ _('Plugin') }}</strong>
+        {{ _('and select') }} <strong>PSU Control - eWeLink</strong> {{ _('in PSU Control settings.') }}
     </div>
 
     <fieldset>
-        <legend>eWeLink Credentials</legend>
+        {# NOTE: Header for the credentials section #}
+        <legend>{{ _('eWeLink Credentials') }}</legend>
         <!--
             Credentials Inputs
             Bound directly to `settings.plugins.psucontrol_ewelink.email` and `.password`.
@@ -41,13 +48,15 @@
             if an encrypted password is already stored.
         -->
         <div class="control-group">
-            <label class="control-label">Email</label>
+            {# NOTE: Label for email input field #}
+            <label class="control-label">{{ _('Email') }}</label>
             <div class="controls">
                 <input type="text" class="input-block-level" data-bind="value: settings.plugins.psucontrol_ewelink.email">
             </div>
         </div>
         <div class="control-group">
-            <label class="control-label">Password</label>
+            {# NOTE: Label for password input field #}
+            <label class="control-label">{{ _('Password') }}</label>
             <div class="controls">
                 <input type="password" class="input-block-level" data-bind="value: settings.plugins.psucontrol_ewelink.password">
             </div>
@@ -64,19 +73,22 @@
         -->
         <div class="control-group">
             <div class="controls">
+                {# NOTE: Button label to test the API connection #}
                 <button type="button" class="btn btn-primary" data-bind="click: testConnection, disable: scanning">
-                    <span data-bind="visible: !scanning()">Test Connection / Get Devices</span>
-                    <span data-bind="visible: scanning">Scanning... <i class="icon-spinner icon-spin"></i></span>
+                    <span data-bind="visible: !scanning()">{{ _('Test Connection / Get Devices') }}</span>
+                    {# NOTE: Text shown on button while scanning for devices #}
+                    <span data-bind="visible: scanning">{{ _('Scanning...') }} <i class="icon-spinner icon-spin"></i></span>
                 </button>
                 <div data-bind="visible: scanError, text: scanError" class="text-error help-block"></div>
                 <div data-bind="visible: scanSuccess, text: scanSuccess" class="text-success help-block"></div>
             </div>
         </div>
 
-        <legend>Device Configuration</legend>
-        <legend>Device Configuration</legend>
+        {# NOTE: Header for the device configuration section #}
+        <legend>{{ _('Device Configuration') }}</legend>
         <div class="control-group">
-            <label class="control-label">Device ID</label>
+            {# NOTE: Label for device ID input field #}
+            <label class="control-label">{{ _('Device ID') }}</label>
             <div class="controls">
                 <!--
                     Device ID Input
@@ -91,10 +103,11 @@
                     Clicking calls `selectDevice` to populate the input above.
                 -->
                 <div style="margin-top: 10px;" data-bind="visible: deviceList().length > 0">
-                    <span class="help-inline">Found Devices:</span>
+                    <span class="help-inline">{{ _('Found Devices:') }}</span>
                     <div class="btn-group">
                       <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                        Select Device
+                        {# NOTE: Placeholder text for device selection dropdown #}
+                        {{ _('Select Device') }}
                         <span class="caret"></span>
                       </a>
                       <ul class="dropdown-menu" data-bind="foreach: deviceList">
@@ -102,8 +115,10 @@
                             <a href="#" data-bind="click: $parent.selectDevice">
                                 <strong data-bind="text: name"></strong><br>
                                 <small data-bind="text: deviceid"></small>
-                                <span data-bind="visible: online" class="label label-success">Online</span>
-                                <span data-bind="visible: !online" class="label label-important">Offline</span>
+                                {# NOTE: Status label indicating device is online #}
+                                <span data-bind="visible: online" class="label label-success">{{ _('Online') }}</span>
+                                {# NOTE: Status label indicating device is offline #}
+                                <span data-bind="visible: !online" class="label label-important">{{ _('Offline') }}</span>
                             </a>
                         </li>
                       </ul>

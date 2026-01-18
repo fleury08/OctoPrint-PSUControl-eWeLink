@@ -122,7 +122,8 @@ $(function () {
             }
 
             if (!email) {
-                var err = "Please enter Email.";
+                // NOTE: Error message shown when email field is empty
+                var err = gettext("Please enter Email.");
                 self.scanError(err);
                 self.scanning(false);
                 new PNotify({ title: 'Error', text: err, type: 'error', text_escape: true });
@@ -138,7 +139,8 @@ $(function () {
                     if (response.error) {
                         self.scanError(response.error);
                         new PNotify({
-                            title: 'eWeLink Error',
+                            // NOTE: Title of error notification
+                            title: gettext('eWeLink Error'),
                             text: response.error,
                             type: 'error',
                             hide: false,
@@ -146,10 +148,12 @@ $(function () {
                         });
                     } else if (response.devices) {
                         self.deviceList(response.devices);
-                        var successMsg = "Found " + response.devices.length + " devices!";
+                        // NOTE: Status message showing number of devices found
+                        var successMsg = _.sprintf(gettext("Found %(count)d devices!"), { count: response.devices.length });
                         self.scanSuccess(successMsg);
                         new PNotify({
-                            title: 'eWeLink Connected',
+                            // NOTE: Title of success notification
+                            title: gettext('eWeLink Connected'),
                             text: successMsg,
                             type: 'success',
                             text_escape: true
@@ -157,13 +161,15 @@ $(function () {
                     }
                 })
                 .fail(function (xhr) {
-                    var msg = "API Request failed";
+                    // NOTE: Generic error message when API request fails
+                    var msg = gettext("API Request failed");
                     if (xhr.responseJSON && xhr.responseJSON.error) {
                         msg = xhr.responseJSON.error;
                     }
                     self.scanError(msg);
                     new PNotify({
-                        title: 'Connection Failed',
+                        // NOTE: Title of connection failure notification
+                        title: gettext('Connection Failed'),
                         text: msg,
                         type: 'error',
                         hide: false,
@@ -180,8 +186,10 @@ $(function () {
             self.settingsViewModel.settings.plugins.psucontrol_ewelink.device_id(device.deviceid);
             // Optionally verify selection
             new PNotify({
-                title: 'Device Selected',
-                text: 'Selected ' + device.name + ' (' + device.deviceid + ')',
+                // NOTE: Title of device selection notification
+                title: gettext('Device Selected'),
+                // NOTE: Notification text confirming device selection
+                text: _.sprintf(gettext('Selected %(name)s (%(id)s)'), { name: device.name, id: device.deviceid }),
                 type: 'info',
                 text_escape: true
             });

@@ -9,6 +9,7 @@ import os
 import binascii
 from ewelink import EWeLink
 from ewelink.types import AppCredentials, EmailUserCredentials
+from flask_babel import gettext
 
 __plugin_name__ = "PSU Control - eWeLink"
 __plugin_pythoncompat__ = ">=3.9,<4"
@@ -297,7 +298,8 @@ class PSUControlEWeLinkPlugin(
             except Exception as e:
                 return flask.jsonify(dict(error=str(e)))
 
-        return flask.make_response("Unknown command", 400)
+        # NOTE: Error message when API command is not recognized
+        return flask.make_response(gettext("Unknown command"), 400)
 
     async def _async_fetch_devices(self, email, password):
         try:
@@ -318,7 +320,8 @@ class PSUControlEWeLinkPlugin(
                     })
             return devices
         except Exception as e:
-            return f"Connection failed: {str(e)}"
+            # NOTE: Error message showing the specific exception error
+            return gettext("Connection failed: %(error)s") % {'error': str(e)}
 
     def get_psu_state(self):
         """

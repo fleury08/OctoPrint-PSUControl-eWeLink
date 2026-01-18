@@ -157,3 +157,4 @@ Follow these rules to maintain the stability of the plugin:
 - [API.md](API.md) - Endpoint reference
 - [TROUBLESHOOTING.md](TROUBLESHOOTING.md) - Common issues and solutions
 - [CHANGELOG.md](CHANGELOG.md) - Version history
+- [TRANSLATIONS.md](TRANSLATIONS.md) - Translation guide

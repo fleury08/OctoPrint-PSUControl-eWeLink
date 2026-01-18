@@ -54,3 +54,7 @@ You can:
 ## Contact
 
 For questions about this privacy policy, please open an issue on [GitHub](https://github.com/chrismin13/OctoPrint-PSUControl-eWeLink/issues).
+
+---
+
+📚 **More docs:** [README](README.md) · [Troubleshooting](docs/TROUBLESHOOTING.md) · [Security](docs/SECURITY.md) · [API](docs/API.md) · [Architecture](docs/ARCHITECTURE.md) · [Development](docs/DEVELOPMENT.md) · [Changelog](docs/CHANGELOG.md) · [Translations](docs/TRANSLATIONS.md)

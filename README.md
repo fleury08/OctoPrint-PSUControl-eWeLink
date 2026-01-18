@@ -78,6 +78,7 @@ You can also trigger a release manually from the **Actions** tab → **Release**
 | [API Reference](docs/API.md) | Internal APIs and integration points |
 | [Architecture](docs/ARCHITECTURE.md) | Technical design overview |
 | [Development](docs/DEVELOPMENT.md) | Setup for contributors |
+| [Translations](docs/TRANSLATIONS.md) | How to add and maintain translations |
 | [Changelog](docs/CHANGELOG.md) | Version history |
 | [Privacy Policy](PRIVACY.md) | Data handling practices |
 

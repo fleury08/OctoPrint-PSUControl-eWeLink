@@ -13,7 +13,7 @@ name = "OctoPrint-PSUControl-eWeLink"
 # VERSION: Update this when releasing
 # Also update: docs/CHANGELOG.md
 # ============================================
-version = "1.0.6"
+version = "1.0.7"
 
 description = "Integrates eWeLink smart switches with OctoPrint PSU Control"
 authors = [
@@ -62,3 +62,9 @@ psucontrol_ewelink = "octoprint_psucontrol_ewelink"
 
 [project.urls]
 Homepage = "https://github.com/chrismin13/OctoPrint-PSUControl-eWeLink"
+
+[project.optional-dependencies]
+develop = [
+    "go-task-bin",
+    "Babel"
+]

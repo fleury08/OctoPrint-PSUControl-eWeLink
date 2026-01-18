@@ -3,3 +3,5 @@ include LICENSE
 include PRIVACY.md
 recursive-include octoprint_psucontrol_ewelink/templates *
 recursive-include octoprint_psucontrol_ewelink/static *
+recursive-include octoprint_psucontrol_ewelink/translations *
+recursive-include docs *
