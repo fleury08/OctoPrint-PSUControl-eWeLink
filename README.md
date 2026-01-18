@@ -16,7 +16,7 @@ Integrate [eWeLink](https://ewelink.cc/) smart switches (Sonoff, etc.) with [Oct
 
 ## Requirements
 
-*   **OctoPrint**: 1.3.10 or higher
+*   **OctoPrint**: 1.9.0 or higher
 *   **OctoPrint-PSUControl**: Installed and configured
 *   **eWeLink Account**: Email and Password
 *   **eWeLink Device**: A smart switch (e.g., Sonoff Basic, S26) connected to your printer
