@@ -141,4 +141,4 @@ The eWeLink API automatically redirects to the correct region:
 
 ---
 
-📚 **More docs:** [README](../README.md) · [Troubleshooting](TROUBLESHOOTING.md) · [Security](SECURITY.md) · [API](API.md) · [Development](DEVELOPMENT.md) · [Changelog](CHANGELOG.md)
+📚 **More docs:** [README](../README.md) · [Troubleshooting](TROUBLESHOOTING.md) · [Security](SECURITY.md) · [API](API.md) · [Development](DEVELOPMENT.md) · [Changelog](CHANGELOG.md) · [Translations](TRANSLATIONS.md)
