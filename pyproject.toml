@@ -39,10 +39,17 @@ dependencies = [
     "ewelink>=0.2.1"
 ]
 
+# ============================================
+# SETUPTOOLS CONFIGURATION
+# ============================================
+
 [tool.setuptools]
+# Include non-Python files specified in MANIFEST.in (templates, static, etc.)
 include-package-data = true
 
 [tool.setuptools.packages.find]
+# Which Python packages to include in the distribution
+# The .* pattern includes subpackages (e.g., static/, templates/)
 include = [
     "octoprint_psucontrol_ewelink",
     "octoprint_psucontrol_ewelink.*"
