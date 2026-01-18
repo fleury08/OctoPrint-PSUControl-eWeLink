@@ -6,14 +6,14 @@ on:
     branches:
       - main
     paths:
-      - 'setup.py'
+      - 'pyproject.toml'
 
 jobs:
   release:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -25,10 +25,10 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Get version from setup.py
+      - name: Get version from pyproject.toml
         id: get_version
         run: |
-          VERSION=$(python -c "import re; content=open('setup.py').read(); print(re.search(r'plugin_version\s*=\s*[\"\\']([^\"\\']+)[\"\\']', content).group(1))")
+          VERSION=$(python -c "import tomllib; print(tomllib.load(open('pyproject.toml', 'rb'))['project']['version'])")
           echo "version=$VERSION" >> $GITHUB_OUTPUT
           echo "Detected version: $VERSION"
 
@@ -56,14 +56,14 @@ jobs:
           name: v${{ steps.get_version.outputs.version }}
           body: |
             ## OctoPrint-PSUControl-eWeLink v${{ steps.get_version.outputs.version }}
-            
+
             ### Installation
-            
+
             Install via OctoPrint Plugin Manager or manually:
             ```
             https://github.com/${{ github.repository }}/archive/${{ steps.get_version.outputs.version }}.zip
             ```
-            
+
             See [CHANGELOG](https://github.com/${{ github.repository }}/blob/main/docs/CHANGELOG.md) for details.
           draft: false
           prerelease: false
