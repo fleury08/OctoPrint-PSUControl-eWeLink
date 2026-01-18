@@ -52,7 +52,9 @@ Run with: `python3 -m unittest tests/test_plugin.py`
 
 ## Gotchas
 
-See [`docs/DEVELOPMENT.md`](docs/DEVELOPMENT.md) for known quirks, workarounds, and guidelines.
+- **Commits**: Always use [Conventional Commits](https://www.conventionalcommits.org/) format with one-line messages
+  - Examples: `feat: add device discovery`, `fix: handle connection timeout`, `docs: update README`, `chore: bump Python version`
+- See [`docs/DEVELOPMENT.md`](docs/DEVELOPMENT.md) for known quirks, workarounds, and guidelines.
 
 ## Release Process
 

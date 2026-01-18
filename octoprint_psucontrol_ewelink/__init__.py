@@ -11,7 +11,7 @@ from ewelink import EWeLink
 from ewelink.types import AppCredentials, EmailUserCredentials
 
 __plugin_name__ = "PSU Control - eWeLink"
-__plugin_pythoncompat__ = ">=3.7,<4"
+__plugin_pythoncompat__ = ">=3.9,<4"
 __plugin_privacypolicy__ = "https://github.com/chrismin13/OctoPrint-PSUControl-eWeLink/blob/main/PRIVACY.md"
 
 # Known working App ID and Secret (extracted from SonoffLAN)

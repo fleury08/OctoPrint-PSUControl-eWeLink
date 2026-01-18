@@ -114,7 +114,7 @@ Look for:
    Check for IndentationError or SyntaxError in logs.
 
 3. **Python version:**
-   Plugin requires Python 3.7+. Check:
+   Plugin requires Python 3.9+. Check:
    ```bash
    python --version
    ```

@@ -56,7 +56,7 @@ def params():
 		include_package_data=True,
         package_data={plugin_package: ["templates/*", "static/js/*"]},
 		zip_safe=False,
-        python_requires=">=3.7,<4",
+        python_requires=">=3.9,<4",
 		install_requires=plugin_requires,
 		entry_points={
 			"octoprint.plugin": [
