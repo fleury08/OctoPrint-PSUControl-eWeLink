@@ -2,6 +2,12 @@
 
 All notable changes to this project are documented in this file.
 
+## [1.0.11] - 2026-01-18
+
+### Fixed
+- Fixed incomplete release 1.0.10 (missed committing modified source files).
+- Ensuring all translation source files and compilation artifacts are included.
+
 ## [1.0.10] - 2026-01-18
 
 ### Fixed

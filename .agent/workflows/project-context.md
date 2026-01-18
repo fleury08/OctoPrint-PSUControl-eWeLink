@@ -87,8 +87,9 @@ Run with: `python3 -m unittest tests/test_plugin.py`
 
 1. Bump version in `pyproject.toml` (line 7)
 2. Update `docs/CHANGELOG.md`
-3. Push to main → GitHub Action creates release
-4. Update `plugins.octoprint.org` repo if description/features changed
+3. **Commit ALL files**: Always `git add .` (or specific files) to ensure **all** changes (including compiled translations, modified source, etc.) are included.
+4. Push to main → GitHub Action creates release
+5. Update `plugins.octoprint.org` repo if description/features changed
 
 ## My Request
 

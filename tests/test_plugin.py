@@ -84,18 +84,12 @@ class MockRestartNeedingPlugin(object):
     pass
 
 
-class MockTranslationPlugin(object):
-    def get_translation_directory(self):
-        return "translations"
-
-
 mock_op_plugin.StartupPlugin = MockStartupPlugin
 mock_op_plugin.ShutdownPlugin = MockShutdownPlugin
 mock_op_plugin.TemplatePlugin = MockTemplatePlugin
 mock_op_plugin.SettingsPlugin = MockSettingsPlugin
 mock_op_plugin.SimpleApiPlugin = MockSimpleApiPlugin
 mock_op_plugin.AssetPlugin = MockAssetPlugin
-mock_op_plugin.TranslationPlugin = MockTranslationPlugin
 mock_op_plugin.RestartNeedingPlugin = MockRestartNeedingPlugin
 
 # Mock ewelink module
