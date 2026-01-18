@@ -38,7 +38,7 @@ Integrate [eWeLink](https://ewelink.cc/) smart switches (Sonoff, etc.) with [Oct
 
 1.  Open **OctoPrint Settings** and navigate to **PSU Control - eWeLink** (under Plugins).
 2.  Enter your **eWeLink Email** and **Password**.
-3.  Click **Test Connection / Get Devices**. 
+3.  Click **Test Connection / Get Devices**.
     *   This will check your credentials and fetch your available devices.
     *   The region is auto-detected by the eWeLink API.
 4.  Select your printer's smart switch from the **Device ID** dropdown.

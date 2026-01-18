@@ -18,18 +18,19 @@ __plugin_privacypolicy__ = "https://github.com/chrismin13/OctoPrint-PSUControl-e
 APP_ID = "R8Oq3y0eSZSYdKccHlrQzT1ACCOUT9Gv"
 APP_SECRET = "1ve5Qk9GXfUhKAn1svnKwpAlxXkMarru"
 
-class PSUControlEWeLinkPlugin(octoprint.plugin.StartupPlugin,
-                              octoprint.plugin.ShutdownPlugin,
-                              octoprint.plugin.TemplatePlugin,
-                              octoprint.plugin.SettingsPlugin,
-                              octoprint.plugin.SimpleApiPlugin,
-                              octoprint.plugin.AssetPlugin,
-                              octoprint.plugin.RestartNeedingPlugin):
+class PSUControlEWeLinkPlugin(
+        octoprint.plugin.StartupPlugin,
+        octoprint.plugin.ShutdownPlugin,
+        octoprint.plugin.TemplatePlugin,
+        octoprint.plugin.SettingsPlugin,
+        octoprint.plugin.SimpleApiPlugin,
+        octoprint.plugin.AssetPlugin,
+        octoprint.plugin.RestartNeedingPlugin):
     """
     Main Plugin Class.
-    
+
     Integrates eWeLink cloud devices with OctoPrint's PSU Control plugin.
-    
+
     Architecture:
     - Inherits from multiple OctoPrint mixins to handle settings, assets, and APIs.
     - Manages a separate background thread with an `asyncio` event loop.
@@ -52,7 +53,7 @@ class PSUControlEWeLinkPlugin(octoprint.plugin.StartupPlugin,
         """
         if self._salt:
             return self._salt
-        
+
         salt_path = os.path.join(self.get_plugin_data_folder(), "salt")
         if os.path.exists(salt_path):
             with open(salt_path, "rb") as f:
@@ -72,7 +73,7 @@ class PSUControlEWeLinkPlugin(octoprint.plugin.StartupPlugin,
         """
         Obfuscates the password using XOR with a local salt.
         Returns a string prefixed with "ENC:" to identify it as encrypted.
-        Note: This is not "secure" encryption (key is on disk), but prevents 
+        Note: This is not "secure" encryption (key is on disk), but prevents
         accidental exposure in logs or the UI.
         """
         if not plaintext or plaintext.startswith("ENC:"):
@@ -102,7 +103,7 @@ class PSUControlEWeLinkPlugin(octoprint.plugin.StartupPlugin,
             return ciphertext
 
     ##~~ AssetPlugin mixin
-    
+
     def get_assets(self):
         return dict(
             js=["js/psucontrol_ewelink.js"]
@@ -116,7 +117,7 @@ class PSUControlEWeLinkPlugin(octoprint.plugin.StartupPlugin,
             password="",
             device_id="",
         )
-    
+
 
 
     def on_after_startup(self):
@@ -128,7 +129,7 @@ class PSUControlEWeLinkPlugin(octoprint.plugin.StartupPlugin,
         4. Registers with the parent PSU Control plugin.
         """
         self._logger.info("PSUControl-eWeLink loaded!")
-        
+
         # Migration: Encrypt existing plaintext password
         stored_password = self._settings.get(["password"])
         if stored_password and not stored_password.startswith("ENC:"):
@@ -139,7 +140,7 @@ class PSUControlEWeLinkPlugin(octoprint.plugin.StartupPlugin,
 
         self._start_loop()
         self._init_ewelink()
-        
+
         # Register with PSU Control
         helpers = self._plugin_manager.get_helpers("psucontrol")
         if helpers and "register_plugin" in helpers:
@@ -178,7 +179,7 @@ class PSUControlEWeLinkPlugin(octoprint.plugin.StartupPlugin,
         It submits the coroutine to the background loop and waits for the result (up to 10s).
         """
         if not self._loop:
-             self._start_loop()
+            self._start_loop()
         future = asyncio.run_coroutine_threadsafe(coro, self._loop)
         try:
             return future.result(timeout=10) # 10s timeout for operations
@@ -207,10 +208,10 @@ class PSUControlEWeLinkPlugin(octoprint.plugin.StartupPlugin,
 
     async def _async_connect(self, email, password, device_id):
         self._logger.info(f"Connecting to eWeLink with device: {device_id}...")
-        
+
         user_cred = EmailUserCredentials(email=email, password=password)
         app_cred = AppCredentials(id=APP_ID, secret=APP_SECRET)
-        
+
         self._ewelink_app = EWeLink(app_cred=app_cred, user_cred=user_cred)
         login = await self._ewelink_app.login()
         self._logger.info(f"eWeLink Logged in. Region: {login.region}")
@@ -222,13 +223,13 @@ class PSUControlEWeLinkPlugin(octoprint.plugin.StartupPlugin,
         """
         device_id = self._settings.get(["device_id"])
         if not self._ewelink_app:
-             self._logger.warning("eWeLink app not connected.")
-             return
+            self._logger.warning("eWeLink app not connected.")
+            return
         try:
-             self._logger.info("Turning PSU ON via eWeLink...")
-             self._run_coro(self._toggle_device(device_id, 'on'))
+            self._logger.info("Turning PSU ON via eWeLink...")
+            self._run_coro(self._toggle_device(device_id, 'on'))
         except Exception as e:
-             self._logger.error(f"Error turning ON: {e}")
+            self._logger.error(f"Error turning ON: {e}")
 
     def turn_psu_off(self):
         """
@@ -236,13 +237,13 @@ class PSUControlEWeLinkPlugin(octoprint.plugin.StartupPlugin,
         """
         device_id = self._settings.get(["device_id"])
         if not self._ewelink_app:
-             self._logger.warning("eWeLink app not connected.")
-             return
+            self._logger.warning("eWeLink app not connected.")
+            return
         try:
-             self._logger.info("Turning PSU OFF via eWeLink...")
-             self._run_coro(self._toggle_device(device_id, 'off'))
+            self._logger.info("Turning PSU OFF via eWeLink...")
+            self._run_coro(self._toggle_device(device_id, 'off'))
         except Exception as e:
-             self._logger.error(f"Error turning OFF: {e}")
+            self._logger.error(f"Error turning OFF: {e}")
 
     # SimpleApiPlugin
 
@@ -262,7 +263,7 @@ class PSUControlEWeLinkPlugin(octoprint.plugin.StartupPlugin,
         elif data.get("password"):
             # Encrypt new password
             data["password"] = self._encrypt_password(data["password"])
-            
+
         octoprint.plugin.SettingsPlugin.on_settings_save(self, data)
         self._logger.info("Settings saved. Re-initializing eWeLink connection...")
         # Re-init connection in a separate thread to avoid blocking
@@ -286,16 +287,16 @@ class PSUControlEWeLinkPlugin(octoprint.plugin.StartupPlugin,
                 # Retrieve and decrypt stored password
                 stored_encrypted = self._settings.get(["password"])
                 password = self._decrypt_password(stored_encrypted)
-            
+
             try:
                 # Region is auto-detected by the API
                 result = self._run_coro(self._async_fetch_devices(email, password))
-                if isinstance(result, str): # Error message
-                     return flask.jsonify(dict(error=result))
+                if isinstance(result, str):  # Error message
+                    return flask.jsonify(dict(error=result))
                 return flask.jsonify(dict(devices=result))
             except Exception as e:
                 return flask.jsonify(dict(error=str(e)))
-                
+
         return flask.make_response("Unknown command", 400)
 
     async def _async_fetch_devices(self, email, password):
@@ -304,7 +305,7 @@ class PSUControlEWeLinkPlugin(octoprint.plugin.StartupPlugin,
             app_cred = AppCredentials(id=APP_ID, secret=APP_SECRET)
             app = EWeLink(app_cred=app_cred, user_cred=user_cred)
             await app.login()
-            
+
             resp = await app._auth_request("GET", "v2/device/thing")
             devices = []
             if "thingList" in resp:
@@ -328,14 +329,14 @@ class PSUControlEWeLinkPlugin(octoprint.plugin.StartupPlugin,
         """
         device_id = self._settings.get(["device_id"])
         if not self._ewelink_app:
-             return False
+            return False
         try:
-             # run_coro returns the result of the coro
-             return self._run_coro(self._get_device_state(device_id))
+            # run_coro returns the result of the coro
+            return self._run_coro(self._get_device_state(device_id))
         except Exception as e:
-             # Suppress verbose error logging for polling
-             # self._logger.debug(f"Error getting state: {e}") 
-             return False
+            # Suppress verbose error logging for polling
+            # self._logger.debug(f"Error getting state: {e}")
+            return False
 
     async def _toggle_device(self, device_id, state):
         await self._ewelink_app._auth_request(

@@ -2,8 +2,8 @@
 # Test Suite for OctoPrint-PSUControl-eWeLink
 #
 # PURPOSE:
-# This file contains "Unit Tests". These are automated checks to verify that 
-# the plugin's logic works correctly in isolation. 
+# This file contains "Unit Tests". These are automated checks to verify that
+# the plugin's logic works correctly in isolation.
 #
 # IS THIS REQUIRED?
 # No. The plugin will function perfectly fine on a printer without this file.
@@ -112,7 +112,7 @@ class TestPSUControlEWeLinkPlugin(unittest.TestCase):
     def setUp(self):
         """
         Runs before EACH test method.
-        Creates a fresh instance of the plugin and replaces its internal components 
+        Creates a fresh instance of the plugin and replaces its internal components
         (logger, settings, manager) with Mocks so we can track how they are used.
         """
         self.plugin = PSUControlEWeLinkPlugin()
@@ -280,7 +280,7 @@ class TestPSUControlEWeLinkPlugin(unittest.TestCase):
         """Test API get_devices uses stored credentials if not provided"""
         # Data with empty password (simulating masked UI)
         data = {"email": "", "password": ""}
-        
+
         # Mock settings to return stored credentials
         # side_effect: first call (email), second call (password)
         def get_side_effect(args):
@@ -288,17 +288,17 @@ class TestPSUControlEWeLinkPlugin(unittest.TestCase):
             if args == ["password"]: return "ENC:stored_pass"
             return None
         self.plugin._settings.get.side_effect = get_side_effect
-        
+
         # Mock decrypt
         self.plugin._decrypt_password = MagicMock(return_value="stored_pass")
-        
+
         # Mock async runner and fetcher
         self.plugin._run_coro = MagicMock(return_value=[{"name": "TestDevice"}])
         self.plugin._async_fetch_devices = MagicMock()
-        
+
         # Call command
         response = self.plugin.on_api_command("get_devices", data)
-        
+
         # Verify
         self.plugin._async_fetch_devices.assert_called_with("stored@email.com", "stored_pass")
         self.plugin._run_coro.assert_called()
@@ -307,12 +307,12 @@ class TestPSUControlEWeLinkPlugin(unittest.TestCase):
         """Test turn_psu_on calls toggle_device when connected"""
         self.plugin._ewelink_app = MagicMock() # Connected
         self.plugin._settings.get.return_value = "device123"
-        
+
         self.plugin._run_coro = MagicMock()
         self.plugin._toggle_device = MagicMock()
-        
+
         self.plugin.turn_psu_on()
-        
+
         self.plugin._toggle_device.assert_called_with("device123", "on")
         self.plugin._run_coro.assert_called()
 

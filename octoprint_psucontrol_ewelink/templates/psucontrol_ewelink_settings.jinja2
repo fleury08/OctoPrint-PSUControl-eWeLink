@@ -1,10 +1,10 @@
-<!-- 
+<!--
     OctoPrint-PSUControl-eWeLink Settings Template
-    
+
     This Jinja2 template defines the HTML for the plugin's settings page.
-    It uses Knockout.js data bindings (data-bind="...") to connect to the ViewModel 
+    It uses Knockout.js data bindings (data-bind="...") to connect to the ViewModel
     defined in `static/js/psucontrol_ewelink.js`.
-    
+
     Key features:
     - Alerts for missing dependencies (PSU Control)
     - Credentials form (Email/Password) with masking
@@ -12,32 +12,32 @@
     - Dynamic device selection dropdown
 -->
 <form class="form-horizontal">
-    <!-- 
-        Dependency Alerts 
-        These alerts use `isPSUControlInstalled` and `isPSUControlConfigured` computed observables 
+    <!--
+        Dependency Alerts
+        These alerts use `isPSUControlInstalled` and `isPSUControlConfigured` computed observables
         from the ViewModel to warn the user if the parent "PSU Control" plugin is missing or not linked.
     -->
     <div class="alert alert-error" data-bind="visible: !isPSUControlInstalled()">
-        <strong>Missing Requirement:</strong> PSU Control plugin is not installed! 
-        This plugin requires <a href="https://plugins.octoprint.org/plugins/psucontrol/" target="_blank">PSU Control</a> to function. 
+        <strong>Missing Requirement:</strong> PSU Control plugin is not installed!
+        This plugin requires <a href="https://plugins.octoprint.org/plugins/psucontrol/" target="_blank">PSU Control</a> to function.
         Please install it via the Plugin Manager.
     </div>
     <div class="alert alert-warning" data-bind="visible: !isPSUControlConfigured()">
-        <strong>Configuration Required:</strong> PSU Control is not configured to use this plugin. 
-        Please go to PSU Control settings, set <strong>Switching Method</strong> to <strong>Plugin</strong>, 
+        <strong>Configuration Required:</strong> PSU Control is not configured to use this plugin.
+        Please go to PSU Control settings, set <strong>Switching Method</strong> to <strong>Plugin</strong>,
         and select <strong>PSU Control - eWeLink</strong>.
     </div>
     <div class="alert alert-info" data-bind="visible: isPSUControlConfigured() && !isSensingConfigured()">
-        <strong>Tip:</strong> For real-time switch state updates, set <strong>Sensing Method</strong> to <strong>Plugin</strong> 
+        <strong>Tip:</strong> For real-time switch state updates, set <strong>Sensing Method</strong> to <strong>Plugin</strong>
         and select <strong>PSU Control - eWeLink</strong> in PSU Control settings.
     </div>
-    
+
     <fieldset>
         <legend>eWeLink Credentials</legend>
-        <!-- 
+        <!--
             Credentials Inputs
             Bound directly to `settings.plugins.psucontrol_ewelink.email` and `.password`.
-            The password field is type="password" and the value is masked ("********") by the ViewModel 
+            The password field is type="password" and the value is masked ("********") by the ViewModel
             if an encrypted password is already stored.
         -->
         <div class="control-group">
@@ -53,14 +53,14 @@
             </div>
         </div>
 
-        
+
         <!-- Test Connection Button -->
-        
-        <!-- 
-             Test Connection Button 
-             - `click: testConnection`: Triggers the API call in the ViewModel
-             - `disable: scanning`: Disables button while request is in flight
-             - Shows spinner icon when `scanning` is true
+
+        <!--
+            Test Connection Button
+            - `click: testConnection`: Triggers the API call in the ViewModel
+            - `disable: scanning`: Disables button while request is in flight
+            - Shows spinner icon when `scanning` is true
         -->
         <div class="control-group">
             <div class="controls">
@@ -78,14 +78,14 @@
         <div class="control-group">
             <label class="control-label">Device ID</label>
             <div class="controls">
-                <!-- 
+                <!--
                     Device ID Input
                     Can be typed manually or populated via the dropdown below.
                 -->
                 <input type="text" class="input-block-level" data-bind="value: settings.plugins.psucontrol_ewelink.device_id">
-                
-                <!-- 
-                    Found Devices Dropdown 
+
+                <!--
+                    Found Devices Dropdown
                     Only visible if `deviceList` (populated by Test Connection) has items.
                     Iterates over `deviceList` to show Name + ID.
                     Clicking calls `selectDevice` to populate the input above.

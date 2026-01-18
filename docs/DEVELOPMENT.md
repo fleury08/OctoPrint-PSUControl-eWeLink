@@ -24,7 +24,7 @@ The `ewelink` Python library has some incomplete implementations.
 ## 4. OctoPrint Metadata & Syntax
 *   **Pitfall**: OctoPrint reads `__init__.py` (AST parsing) to determine plugin metadata like `__plugin_pythoncompat__`.
 *   **Warning**: If `__init__.py` contains **ANY** syntax error (even deep inside a method like an `IndentationError`), the AST parser may fail silently or partially, causing OctoPrint to default to generic values (e.g., claiming the plugin is "Python 2.7" compatible only).
-*   **Best Practice**: 
+*   **Best Practice**:
     1.  Keep metadata (`__plugin_name__`, `__plugin_pythoncompat__`) at the very top of `__init__.py`.
     2.  Ensure strict syntax correctness before packaging.
     3.  Avoid complex top-level imports that might fail in environments with missing dependencies, although standard imports are fine if the environment is correct.
@@ -110,15 +110,15 @@ async def test():
     )
     user_cred = EmailUserCredentials(email="your@email.com", password="yourpass")
     app = EWeLink(app_cred=app_cred, user_cred=user_cred)
-    
+
     login = await app.login(region="us")
     print(f"Logged in! Region: {login.region}")
-    
+
     resp = await app._auth_request("GET", "v2/device/thing")
     for thing in resp["thingList"]:
         item = thing.get("itemData", {})
         print(f"Device: {item.get('name')} ({item.get('deviceid')}) - {'Online' if item.get('online') else 'Offline'}")
-    
+
     await app.close()
 
 asyncio.run(test())

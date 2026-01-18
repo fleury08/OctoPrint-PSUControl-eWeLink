@@ -108,7 +108,7 @@ HTML form with data-bindings to the ViewModel:
 ### 1. Login Flow
 
 ```
-User enters credentials → Settings saved → on_settings_save() 
+User enters credentials → Settings saved → on_settings_save()
     → _init_ewelink() → _async_connect() → eWeLink API login
     → Token stored in memory (not persisted)
 ```
@@ -116,7 +116,7 @@ User enters credentials → Settings saved → on_settings_save()
 ### 2. Device Control Flow
 
 ```
-PSU Control calls turn_psu_on() → _run_coro(_toggle_device()) 
+PSU Control calls turn_psu_on() → _run_coro(_toggle_device())
     → eWeLink API POST /v2/device/thing/status
     → Device switched
 ```

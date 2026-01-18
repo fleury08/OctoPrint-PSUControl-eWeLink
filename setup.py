@@ -42,28 +42,28 @@ plugin_requires = ["ewelink>=0.2.1"]
 from setuptools import setup
 
 def params():
-	name = plugin_name
-	version = plugin_version
-	return dict(
-		name=name,
-		version=version,
-		description=plugin_description,
-		author=plugin_author,
-		author_email=plugin_author_email,
-		url=plugin_url,
-		license=plugin_license,
-		packages=[plugin_package],
-		include_package_data=True,
+    name = plugin_name
+    version = plugin_version
+    return dict(
+        name=name,
+        version=version,
+        description=plugin_description,
+        author=plugin_author,
+        author_email=plugin_author_email,
+        url=plugin_url,
+        license=plugin_license,
+        packages=[plugin_package],
+        include_package_data=True,
         package_data={plugin_package: ["templates/*", "static/js/*"]},
-		zip_safe=False,
+        zip_safe=False,
         python_requires=">=3.9,<4",
-		install_requires=plugin_requires,
-		entry_points={
-			"octoprint.plugin": [
-				"{} = {}".format(plugin_identifier, plugin_package)
-			]
-		},
-	)
+        install_requires=plugin_requires,
+        entry_points={
+            "octoprint.plugin": [
+                "{} = {}".format(plugin_identifier, plugin_package)
+            ]
+        },
+    )
 
 if __name__ == "__main__":
-	setup(**params())
+    setup(**params())

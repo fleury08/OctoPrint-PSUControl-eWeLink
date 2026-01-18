@@ -33,11 +33,11 @@ tags:
 compatibility:
   octoprint:
   - 1.3.10
-  
+
   os:
   - posix
   - windows
-  
+
   python: ">=3.9,<4"
 
 attributes:
