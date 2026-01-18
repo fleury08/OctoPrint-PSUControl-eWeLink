@@ -8,9 +8,14 @@ All notable changes to this project are documented in this file.
 - **EditorConfig** - Added `.editorconfig` for consistent code style across editors
 - **MANIFEST.in** - Added manifest file for proper PyPI source distribution packaging
 - **GitHub Issue Templates** - Added structured bug report and feature request forms
+- **Modern Packaging** - Migrated from `setup.py` to `pyproject.toml` (PEP 517/518)
+
+### Changed
+- **Version Location** - Version now in `pyproject.toml` (line 7) instead of `setup.py`
 
 ### Maintenance
 - **Code Style** - Fixed all files for editorconfig compliance (trailing whitespace, tabs→spaces, indentation)
+- **Documentation** - Updated README and project-context workflow to reflect pyproject.toml migration
 
 ## [1.0.4] - 2026-01-16
 

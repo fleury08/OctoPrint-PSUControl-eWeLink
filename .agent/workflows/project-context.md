@@ -14,7 +14,7 @@ ewelink-psucontrol/                    # Parent workspace directory
 │   ├── octoprint_psucontrol_ewelink/  # Plugin Python package
 │   ├── extras/psucontrol_ewelink.md   # Local copy of registry metadata
 │   ├── docs/                          # Documentation
-│   └── setup.py                       # Version & dependencies
+│   └── pyproject.toml                # Version, dependencies, metadata
 │
 └── plugins.octoprint.org/             # Official OctoPrint plugin registry (fork)
     └── _plugins/psucontrol_ewelink.md # Registry metadata (submit via PR)
@@ -35,10 +35,10 @@ When changing these values, update **all** locations:
 
 | Value | Files to Update |
 |-------|-----------------|
-| **Python version** | `setup.py`, `__init__.py` (`__plugin_pythoncompat__`), `extras/psucontrol_ewelink.md`, `plugins.octoprint.org/.../psucontrol_ewelink.md`, `docs/TROUBLESHOOTING.md` |
-| **Plugin version** | `setup.py` (line 17), `docs/CHANGELOG.md` |
+| **Python version** | `pyproject.toml`, `__init__.py` (`__plugin_pythoncompat__`), `extras/psucontrol_ewelink.md`, `plugins.octoprint.org/.../psucontrol_ewelink.md`, `docs/TROUBLESHOOTING.md` |
+| **Plugin version** | `pyproject.toml` (line 7), `docs/CHANGELOG.md` |
 | **Description/features** | `extras/psucontrol_ewelink.md`, `plugins.octoprint.org/.../psucontrol_ewelink.md`, `README.md` |
-| **Dependencies** | `setup.py` (`plugin_requires`) |
+| **Dependencies** | `pyproject.toml` (`project.dependencies`) |
 | **OctoPrint compatibility** | `extras/psucontrol_ewelink.md`, `plugins.octoprint.org/.../psucontrol_ewelink.md` |
 
 ## Core Files
@@ -48,7 +48,7 @@ When changing these values, update **all** locations:
 | [`__init__.py`](octoprint_psucontrol_ewelink/__init__.py) | Main plugin class, API handlers, obfuscation |
 | [`psucontrol_ewelink.js`](octoprint_psucontrol_ewelink/static/js/psucontrol_ewelink.js) | Settings UI logic (Knockout.js) |
 | [`psucontrol_ewelink_settings.jinja2`](octoprint_psucontrol_ewelink/templates/psucontrol_ewelink_settings.jinja2) | Settings HTML template |
-| [`setup.py`](setup.py) | Version (line 17), dependencies, metadata |
+| [`pyproject.toml`](pyproject.toml) | Version (line 7), dependencies, metadata |
 
 ## Documentation
 
@@ -85,7 +85,7 @@ Run with: `python3 -m unittest tests/test_plugin.py`
 
 ## Release Process
 
-1. Bump version in `setup.py` (line 17)
+1. Bump version in `pyproject.toml` (line 7)
 2. Update `docs/CHANGELOG.md`
 3. Push to main → GitHub Action creates release
 4. Update `plugins.octoprint.org` repo if description/features changed

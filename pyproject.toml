@@ -1,0 +1,57 @@
+# OctoPrint-PSUControl-eWeLink Plugin Configuration
+# See: https://packaging.python.org/en/latest/guides/writing-pyproject-toml/
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+# Package name (PEP 508 compliant - no spaces, use hyphens)
+name = "OctoPrint-PSUControl-eWeLink"
+
+# ============================================
+# VERSION: Update this when releasing
+# Also update: docs/CHANGELOG.md
+# ============================================
+version = "1.0.5"
+
+description = "Integrates eWeLink smart switches with OctoPrint PSU Control"
+authors = [
+    {name = "Christos Miniotis", email = "chrismin13@gmail.com"}
+]
+readme = {file = "README.md", content-type = "text/markdown"}
+
+# License is read dynamically (set in setup.py for compatibility)
+dynamic = ["license"]
+
+# ============================================
+# PYTHON VERSION
+# Also update: __init__.py (__plugin_pythoncompat__)
+#              extras/psucontrol_ewelink.md (python compatibility)
+# ============================================
+requires-python = ">=3.9, <4"
+
+# ============================================
+# DEPENDENCIES
+# Add any pip packages your plugin needs here
+# ============================================
+dependencies = [
+    "ewelink>=0.2.1"
+]
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+include = [
+    "octoprint_psucontrol_ewelink",
+    "octoprint_psucontrol_ewelink.*"
+]
+
+# OctoPrint plugin entry point
+# Format: plugin_identifier = "plugin_package"
+[project.entry-points."octoprint.plugin"]
+psucontrol_ewelink = "octoprint_psucontrol_ewelink"
+
+[project.urls]
+Homepage = "https://github.com/chrismin13/OctoPrint-PSUControl-eWeLink"

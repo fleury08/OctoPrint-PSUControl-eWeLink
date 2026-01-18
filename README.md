@@ -58,7 +58,7 @@ This plugin takes security seriously:
 
 Releases are automated via GitHub Actions. To create a new release:
 
-1. **Bump the version** in `setup.py` (line 17: `plugin_version = "X.X.X"`)
+1. **Bump the version** in `pyproject.toml` (line 7: `version = "X.X.X"`)
 2. **Update** `docs/CHANGELOG.md` with release notes
 3. **Push to main** - the workflow automatically:
    - Runs unit tests
