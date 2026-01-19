@@ -33,10 +33,14 @@ All notable changes to this project are documented in this file.
 - Migrated plugin initialization from `__init__` to `initialize` to correct inheritance issues with `TranslationPlugin`.
 - Fixed "Plugin disappeared" issue caused by overridden constructor.
 
+> **Note:** `TranslationPlugin` does not exist in OctoPrint—this was an AI hallucination. These changes did not fix the underlying issue.
+
 ## [1.0.8] - 2026-01-18
 
 ### Fixed
 - Fixed missing `TranslationPlugin` inheritance, which prevented translations from loading.
+
+> **Note:** `TranslationPlugin` does not exist in OctoPrint—this was an AI hallucination. This change did not fix anything.
 
 ## [1.0.7] - 2026-01-18
 
