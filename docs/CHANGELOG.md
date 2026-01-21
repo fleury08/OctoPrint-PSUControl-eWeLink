@@ -2,6 +2,11 @@
 
 All notable changes to this project are documented in this file.
 
+## [1.0.14] - 2026-01-21
+
+### Changed
+- Refactored plugin initialization to use `__init__` with `super().__init__()` instead of `initialize()`, following Python best practices.
+
 ## [1.0.13] - 2026-01-18
 
 ### Fixed

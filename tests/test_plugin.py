@@ -122,7 +122,6 @@ class TestPSUControlEWeLinkPlugin(unittest.TestCase):
         (logger, settings, manager) with Mocks so we can track how they are used.
         """
         self.plugin = PSUControlEWeLinkPlugin()
-        self.plugin.initialize()
         self.plugin._logger = MagicMock()
         self.plugin._settings = MagicMock()
         self.plugin._plugin_manager = MagicMock()
