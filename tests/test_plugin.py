@@ -234,6 +234,7 @@ class TestPSUControlEWeLinkPlugin(unittest.TestCase):
         self.assertEqual(len(configs), 1)
         self.assertEqual(configs[0]["type"], "settings")
         self.assertTrue(configs[0]["custom_bindings"])
+        self.assertTrue(self.plugin.is_template_autoescaped())
 
     def test_get_assets(self):
         """Test asset registration"""
@@ -247,6 +248,11 @@ class TestPSUControlEWeLinkPlugin(unittest.TestCase):
         commands = self.plugin.get_api_commands()
 
         self.assertIn("get_devices", commands)
+
+    def test_api_security(self):
+        """Test API protection settings"""
+        self.assertTrue(self.plugin.is_api_adminonly())
+        self.assertTrue(self.plugin.is_api_protected())
 
     def test_on_settings_save_masks_password(self):
         """Test that masked password is not saved"""

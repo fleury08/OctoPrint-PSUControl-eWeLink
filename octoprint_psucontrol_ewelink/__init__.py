@@ -255,6 +255,10 @@ class PSUControlEWeLinkPlugin(
         """Restrict API access to admin users only for security."""
         return True
 
+    def is_api_protected(self):
+        """Require an authenticated OctoPrint user for API access."""
+        return True
+
     def get_api_commands(self):
         return dict(
             get_devices=["email", "password"]
@@ -369,6 +373,10 @@ class PSUControlEWeLinkPlugin(
         return [
             dict(type="settings", custom_bindings=True)
         ]
+
+    def is_template_autoescaped(self):
+        """Enable Jinja autoescaping for plugin templates."""
+        return True
 
     def get_update_information(self):
         return dict(
