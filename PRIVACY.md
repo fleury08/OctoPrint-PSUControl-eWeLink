@@ -26,7 +26,7 @@ This plugin collects and transmits the following data to eWeLink's cloud servers
 
 ## Third-Party Services
 
-This plugin uses [eWeLink's](https://ewelink.cc/) cloud API to communicate with your smart devices. Please refer to [eWeLink's Privacy Policy](https://web.ewelink.cc/privacy-policy.html) for their data handling practices.
+This plugin uses [eWeLink's](https://ewelink.cc/) cloud API to communicate with your smart devices. Please refer to [eWeLink's Privacy Policy](https://appcms.coolkit.cn/web-ewelink/web-privacy/4200.html) for their data handling practices.
 
 **No other third-party services are used by this plugin.**
 
