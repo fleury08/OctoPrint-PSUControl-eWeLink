@@ -2,6 +2,12 @@
 
 All notable changes to this project are documented in this file.
 
+## [1.0.15] - 2026-05-08
+
+### Fixed
+- Declared `SimpleApiPlugin.is_api_protected()` to require authenticated API access and avoid OctoPrint 1.11.2+ warnings.
+- Enabled `TemplatePlugin.is_template_autoescaped()` for safer Jinja rendering and OctoPrint 2.0 readiness.
+
 ## [1.0.14] - 2026-01-21
 
 ### Changed
