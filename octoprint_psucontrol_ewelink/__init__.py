@@ -7,6 +7,8 @@ import threading
 import flask
 import os
 import binascii
+
+import select
 from ewelink import EWeLink
 from ewelink.types import AppCredentials, EmailUserCredentials
 from flask_babel import gettext
@@ -119,8 +121,7 @@ class PSUControlEWeLinkPlugin(
             email="",
             password="",
             device_id="",
-            selected_switch=-1,
-            multiple_switches=False
+            selected_switch=-1
         )
 
 
@@ -227,7 +228,7 @@ class PSUControlEWeLinkPlugin(
         Method called by PSU Control to turn the device ON.
         """
         device_id = self._settings.get(["device_id"])
-        selected_switch = self._settings.get(["selected_switch"])
+        selected_switch = int(self._settings.get(["selected_switch"]))
         if not self._ewelink_app:
             self._logger.warning("eWeLink app not connected.")
             return
@@ -242,7 +243,7 @@ class PSUControlEWeLinkPlugin(
         Method called by PSU Control to turn the device OFF.
         """
         device_id = self._settings.get(["device_id"])
-        selected_switch = self._settings.get(["selected_switch"])
+        selected_switch = int(self._settings.get(["selected_switch"]))
         if not self._ewelink_app:
             self._logger.warning("eWeLink app not connected.")
             return
@@ -341,11 +342,12 @@ class PSUControlEWeLinkPlugin(
             False if OFF
         """
         device_id = self._settings.get(["device_id"])
+        selected_switch = int(self._settings.get(["selected_switch"]))
         if not self._ewelink_app:
             return False
         try:
             # run_coro returns the result of the coro
-            return self._run_coro(self._get_device_state(device_id))
+            return self._run_coro(self._get_device_state(device_id,selected_switch))
         except Exception as e:
             # Suppress verbose error logging for polling
             # self._logger.debug(f"Error getting state: {e}")
@@ -353,9 +355,10 @@ class PSUControlEWeLinkPlugin(
 
     async def _toggle_device(self, device_id, state, selected_switch):
 
-        params = {"switch": state} if int(selected_switch) < 0 else {
+        params = {"switch": state} if selected_switch < 0 else {
             "switches":[{"outlet": selected_switch, "switch": state}]
         }
+        self._logger.info(f"Sending request to eWeLink: {params}, device_id: {device_id}, selected_switch: {selected_switch}")
         await self._ewelink_app._auth_request(
             "POST",
             "v2/device/thing/status",
